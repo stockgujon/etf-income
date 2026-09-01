@@ -1,0 +1,633 @@
+name: 更新 ETF 配息資料（月領試算用）
+
+on:
+  # 台北時間每天 09:25、14:25、19:25（GitHub 用 UTC，所以要減 8 小時）
+  # 刻意跟 etf-radar 的 09:05 / 14:05 / 19:05 錯開 20 分鐘，避免兩個排程同時去打證交所
+  schedule:
+    - cron: '25 1 * * *'
+    - cron: '25 6 * * *'
+    - cron: '25 11 * * *'
+  # 讓你可以在 Actions 分頁手動按「Run workflow」立刻抓一次
+  workflow_dispatch:
+  # 每次改動這個檔案時也抓一次
+  push:
+    paths:
+      - '.github/workflows/update.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-etf-income-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取得倉庫內容
+        uses: actions/checkout@v4
+
+      - name: 安裝 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 產生抓取程式
+        run: |
+          mkdir -p scripts
+          cat > scripts/fetch.mjs <<'FETCH_SCRIPT_EOF'
+          /**
+           * scripts/fetch.mjs
+           *
+           * 由 GitHub Actions 執行：去證交所抓高股息 ETF 資料，寫進 data.json。
+           * 這支程式在 GitHub 的伺服器上跑，不是在你的瀏覽器裡跑，所以不會被 CORS 擋住。
+           *
+           * 與 etf-radar 版本的差異（唯一差異，其餘照抄）：
+           *   多輸出 recentDividends（近 8 筆已除息紀錄）與 trailing12m*（近 12 個月合計），
+           *   讓「月領萬元」可以用實際年配息回推，而不是用單次配息年化。
+           *   這些資料本來就在記憶體裡，不需要多打任何一個請求。
+           *
+           * 本機想手動測試：node scripts/fetch.mjs
+           */
+
+          import { writeFile } from 'node:fs/promises';
+
+          // 證交所有多台主機，且不是每一台都提供全部頁面（wwwc 曾把配息頁下架回 404），
+          // 所以每個請求都依序輪流嘗試，全部失敗才放棄。
+          const TWSE_HOSTS = ['https://www.twse.com.tw', 'https://wwwc.twse.com.tw'];
+          const TWSE = TWSE_HOSTS[0];
+          const RETRY_ROUNDS = 3;
+          const RETRY_DELAY_MS = 2000;
+
+          const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+          // 依序試每一台主機；驗證通過就回傳結果，全部失敗則 value 為 null。
+          async function tryHosts(path, init, validate) {
+            const problems = [];
+            for (const host of TWSE_HOSTS) {
+              try {
+                const response = await fetch(host + path, init);
+                if (!response.ok) { problems.push(`${host} 回應 ${response.status}`); continue; }
+                const value = await validate(response);
+                if (value !== null) return { value, problems };
+                problems.push(`${host} 回應內容不符預期`);
+              } catch (reason) {
+                problems.push(`${host} ${reason && reason.message ? reason.message : '連線失敗'}`);
+              }
+            }
+            return { value: null, problems };
+          }
+
+          // 多主機 + 多輪重試；全部失敗才丟出錯誤。
+          async function fetchFromTwse(label, path, init, validate) {
+            let problems = [];
+            for (let round = 0; round < RETRY_ROUNDS; round += 1) {
+              const attempt = await tryHosts(path, init, validate);
+              if (attempt.value !== null) return attempt.value;
+              problems = attempt.problems;
+              if (round < RETRY_ROUNDS - 1) await sleep(RETRY_DELAY_MS);
+            }
+            throw new Error(`${label}無法取得（${path}）：${problems.join('；')}`);
+          }
+
+          const HIGH_DIVIDEND_TAG = 'ff808081899b8efc0189aa050440001c';
+          const HIGH_DIVIDEND_LOW_VOL_TAG = 'ff808081899b8efc0189aa05af5c001d';
+          const FREQUENCY_OVERRIDES = {
+            '00405A': { label: '季配', times: 4, basis: '證交所新上市商品簡介' },
+            '00999A': { label: '季配', times: 4, basis: '官方公開說明書' },
+          };
+          const TITLE_CONFIRMED_EQUALIZATION = new Set(['00405A', '00999A']);
+
+          // 國外成分股 ETF 的投資地區提示（只用來顯示，判斷「國內／國外」一律以證交所官方清單為準）
+          const FOREIGN_REGION_HINTS = [
+            [/美國|US\b|標普|S&P|那斯達克|費城/i, '美國'],
+            [/日本|日經/, '日本'],
+            [/中國|恒生|滬深|A股/, '中國'],
+            [/亞太/, '亞太'],
+            [/歐洲/, '歐洲'],
+            [/印度/, '印度'],
+            [/越南/, '越南'],
+            [/全球|世界/, '全球'],
+          ];
+
+          function resolveRegion(code, name, domesticCodes) {
+            if (domesticCodes.has(code)) return { region: '國內', regionDetail: '國內成分證券' };
+            for (const [pattern, label] of FOREIGN_REGION_HINTS) {
+              if (pattern.test(name)) return { region: '國外', regionDetail: label };
+            }
+            return { region: '國外', regionDetail: '國外成分證券' };
+          }
+
+          function cleanText(value) {
+            return String(value == null ? '' : value)
+              .replace(/<[^>]+>/g, ' ')
+              .replace(/&nbsp;|&#160;/g, ' ')
+              .replace(/&amp;/g, '&')
+              .replace(/&quot;|&#34;/g, '"')
+              .replace(/&#39;|&apos;/g, "'")
+              .replace(/\s+/g, ' ')
+              .trim();
+          }
+
+          function rocDateToIso(value) {
+            const match = cleanText(value).match(/(\d{2,3})年(\d{1,2})月(\d{1,2})日/);
+            if (!match) return null;
+            return `${Number(match[1]) + 1911}-${match[2].padStart(2, '0')}-${match[3].padStart(2, '0')}`;
+          }
+
+          async function fetchProducts(tag) {
+            const params = new URLSearchParams();
+            params.append('rangeTotalAv', '0');
+            params.append('rangeTotalAv', '99999');
+            params.append('rangeValueYTD', '0');
+            params.append('rangeValueYTD', '99999');
+            params.append('rangeClose1', '0');
+            params.append('rangeClose1', '9999');
+            params.append('assetType', 'Stock');
+            params.append('rewardType', 'Vanilla');
+            params.append('hashtag', tag);
+            params.append('sort', 'stockNo');
+            params.append('orderBy', 'ASC');
+
+            return fetchFromTwse(
+              '商品清單來源',
+              '/zh/ETFortune-institute/ajaxProducts',
+              {
+                method: 'POST',
+                headers: { 'content-type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                body: params,
+              },
+              async (response) => {
+                const payload = await response.json();
+                if (payload.status !== 'success' || !Array.isArray(payload.data)) return null;
+                return payload.data;
+              },
+            );
+          }
+
+          async function fetchDomesticEtfCodes(path) {
+            return fetchFromTwse(
+              '國內 ETF 分類來源',
+              `/rwd/zh/ETF/${path}?response=json`,
+              undefined,
+              async (response) => {
+                const payload = await response.json();
+                if (payload.status !== 'ok' || !Array.isArray(payload.data)) return null;
+                return payload.data.filter((row) => row[3] === 'domestic').map((row) => row[0]);
+              },
+            );
+          }
+
+          function parseDividendRows(html) {
+            const rows = [];
+            const rowPattern = /<tr onclick="document\.location = '\/zh\/ETFortune(?:-institute)?\/etfInfo\/([^']+)';">([\s\S]*?)<\/tr>/g;
+            for (const row of html.matchAll(rowPattern)) {
+              const cells = [...row[2].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((cell) => cell[1]);
+              if (cells.length < 6) continue;
+              const amountText = cleanText(cells[5]).replace(/,/g, '');
+              const descMatch = row[2].match(/data-desc="([\s\S]*?)">詳細資料<\/a>/);
+              rows.push({
+                code: row[1],
+                exDate: rocDateToIso(cells[2]),
+                recordDate: rocDateToIso(cells[3]),
+                paymentDate: rocDateToIso(cells[4]),
+                amount: amountText && Number.isFinite(Number(amountText)) ? Number(amountText) : null,
+                description: cleanText(descMatch ? descMatch[1] : ''),
+              });
+            }
+            return rows;
+          }
+
+          function median(values) {
+            if (!values.length) return null;
+            const sorted = [...values].sort((a, b) => a - b);
+            const middle = Math.floor(sorted.length / 2);
+            return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
+          }
+
+          function inferFrequency(records, description) {
+            const normalized = String(description || '').replace(/\s/g, '');
+            if (/一月.*三月.*五月.*七月.*九月.*十一月/.test(normalized) || /每二個月|每兩個月|雙月/.test(normalized)) {
+              return { label: '雙月配', times: 6, basis: '官方收益分配條款' };
+            }
+            if (/按月|每月/.test(normalized)) return { label: '月配', times: 12, basis: '官方收益分配條款' };
+            if (/按季|每季|每三個月/.test(normalized)) return { label: '季配', times: 4, basis: '官方收益分配條款' };
+            if (/每半年|半年/.test(normalized)) return { label: '半年配', times: 2, basis: '官方收益分配條款' };
+            if (!records.some((item) => item.exDate && item.amount !== null)) {
+              return { label: '待公布', times: 0, basis: '尚無官方配息紀錄' };
+            }
+
+            const dates = records
+              .filter((item) => item.exDate && item.amount !== null)
+              .map((item) => new Date(`${item.exDate}T00:00:00Z`).getTime())
+              .sort((a, b) => b - a)
+              .slice(0, 5);
+            const gaps = dates.slice(0, -1).map((date, index) => Math.abs(date - dates[index + 1]) / 86400000);
+            const gap = median(gaps);
+            if (gap !== null && gap <= 45) return { label: '月配', times: 12, basis: '近次實際配息間隔' };
+            if (gap !== null && gap <= 75) return { label: '雙月配', times: 6, basis: '近次實際配息間隔' };
+            if (gap !== null && gap <= 125) return { label: '季配', times: 4, basis: '近次實際配息間隔' };
+            if (gap !== null && gap <= 220) return { label: '半年配', times: 2, basis: '近次實際配息間隔' };
+            return { label: '年配', times: 1, basis: '近次實際配息間隔' };
+          }
+
+          /* ------------------------------------------------------------------
+             投信「收益分配公告」— 用來補上「下次配息」
+             證交所的配息清單只收錄「已經除息完成」的紀錄，未來已公告但還沒除息的
+             一筆都沒有。所以這裡另外去爬重大消息的收益分配公告，取出除息交易日與
+             公告預估的每單位配發金額。
+
+             注意：公告裡的金額是「預估」值，實際金額會在現金收益公布日才確定。
+             這段整段包在 try/catch 裡，抓不到或解析失敗都只會少了下次配息，
+             不會影響其他資料，也不會讓整個排程失敗。
+          ------------------------------------------------------------------ */
+          const ANNOUNCEMENT_PAGE_SIZE = 100;   // 每頁請求筆數（證交所若不接受會自動退回較小值）
+          const ANNOUNCEMENT_MAX_PAGES = 30;    // 最多翻幾頁（碰到超過保留天數的公告就提早停）
+          const ANNOUNCEMENT_MAX_AGE_DAYS = 45; // 只看最近幾天內的公告
+          const ANNOUNCEMENT_MAX_DETAILS = 60;  // 最多點開幾則公告內文
+
+          // 公告內文裡描述配息金額的寫法各家投信不同，逐一嘗試；都不符合就放棄，不硬猜。
+          const ANNOUNCEMENT_AMOUNT_PATTERNS = [
+            /每受益權單位預計配發金額為新臺幣\s*([0-9]+(?:\.[0-9]+)?)\s*元/,
+            /每一?受益權單位(?:之|的)?(?:預計|實際)?(?:可)?(?:配發|分配|發放)(?:之)?金額[^0-9]{0,24}([0-9]+(?:\.[0-9]+)?)\s*元/,
+            /每一?受益權單位[^。\n]{0,24}?新臺幣\s*([0-9]+(?:\.[0-9]+)?)\s*元/,
+          ];
+
+          function rocSlashDateToIso(value) {
+            const match = String(value).match(/(\d{2,3})\s*[\/\-年]\s*(\d{1,2})\s*[\/\-月]\s*(\d{1,2})/);
+            if (!match) return null;
+            const year = Number(match[1]) + 1911;
+            return `${year}-${match[2].padStart(2, '0')}-${match[3].padStart(2, '0')}`;
+          }
+
+          // 列表頁：每一列的 onclick 網址裡就帶了 fund=<股票代號> 與 date=<公告日>，
+          // 不必去猜基金全名對應哪一檔，直接取用。
+          function parseAnnouncementList(html) {
+            const items = [];
+            const pattern = /document\.location = '([^']*\/zh\/ETFortune\/announcement\?[^']+)'/g;
+            for (const match of html.matchAll(pattern)) {
+              const href = match[1].replace(/&amp;/g, '&');
+              const fund = /[?&]fund=([^&]*)/.exec(href);
+              const date = /[?&]date=(\d{8})/.exec(href);
+              if (!fund || !fund[1] || !date) continue;
+              items.push({
+                code: decodeURIComponent(fund[1]).trim(),
+                announcedOn: `${date[1].slice(0, 4)}-${date[1].slice(4, 6)}-${date[1].slice(6, 8)}`,
+                href,
+              });
+            }
+            return items;
+          }
+
+          // 公告內文：取出「除息交易日」與「每受益權單位預計配發金額」
+          function parseAnnouncementDetail(html) {
+            const text = html
+              .replace(/<br\s*\/?>/gi, '\n')
+              .replace(/<[^>]+>/g, ' ')
+              .replace(/&nbsp;|&#160;/g, ' ')
+              .replace(/&amp;/g, '&')
+              .replace(/[ \t]+/g, ' ');
+
+            const exDateMatch = /除息交易日\s*[:：]?\s*([0-9]{2,3}\s*[\/\-年]\s*[0-9]{1,2}\s*[\/\-月]\s*[0-9]{1,2})/.exec(text);
+            const exDate = exDateMatch ? rocSlashDateToIso(exDateMatch[1]) : null;
+
+            let amount = null;
+            for (const pattern of ANNOUNCEMENT_AMOUNT_PATTERNS) {
+              const match = pattern.exec(text);
+              if (match) {
+                const value = Number(match[1]);
+                if (Number.isFinite(value) && value > 0) { amount = value; break; }
+              }
+            }
+            return { exDate, amount };
+          }
+
+          function daysBetween(isoA, isoB) {
+            return Math.abs(new Date(`${isoA}T00:00:00Z`) - new Date(`${isoB}T00:00:00Z`)) / 86400000;
+          }
+
+          // 掃描收益分配公告，回傳 Map<代號, { exDate, amount, announcedOn }>
+          async function fetchAnnouncedDividends(trackedCodes, today) {
+            const wanted = new Set(trackedCodes);
+            const newestByCode = new Map();
+            let offset = 0;
+
+            for (let page = 0; page < ANNOUNCEMENT_MAX_PAGES; page += 1) {
+              const attempt = await tryHosts(
+                `/zh/ETFortune/announcementList?type=distribution&max=${ANNOUNCEMENT_PAGE_SIZE}&offset=${offset}`,
+                undefined,
+                async (response) => {
+                  const html = await response.text();
+                  const items = parseAnnouncementList(html);
+                  return items.length ? items : null;
+                },
+              );
+              const items = attempt.value;
+              if (!items) break;
+
+              let reachedOldEnough = false;
+              for (const item of items) {
+                if (daysBetween(item.announcedOn, today) > ANNOUNCEMENT_MAX_AGE_DAYS) { reachedOldEnough = true; continue; }
+                // 列表由新到舊，因此每一檔第一次出現的就是最新的一則公告
+                if (wanted.has(item.code) && !newestByCode.has(item.code)) newestByCode.set(item.code, item);
+              }
+
+              offset += items.length;
+              if (reachedOldEnough || newestByCode.size >= wanted.size) break;
+            }
+
+            const announced = new Map();
+            let opened = 0;
+            for (const [code, item] of newestByCode) {
+              if (opened >= ANNOUNCEMENT_MAX_DETAILS) break;
+              opened += 1;
+              const attempt = await tryHosts(item.href, undefined, async (response) => {
+                const detail = parseAnnouncementDetail(await response.text());
+                return detail.exDate ? detail : null;
+              });
+              const detail = attempt.value;
+              if (!detail || detail.amount === null) continue;      // 例如「不予分配」的公告
+              if (!(detail.exDate > today)) continue;               // 只要還沒除息的
+              announced.set(code, { ...detail, announcedOn: item.announcedOn });
+            }
+            return announced;
+          }
+
+          function taipeiToday() {
+            const parts = new Intl.DateTimeFormat('en-CA', {
+              timeZone: 'Asia/Taipei', year: 'numeric', month: '2-digit', day: '2-digit',
+            }).formatToParts(new Date());
+            const get = (type) => (parts.find((part) => part.type === type) || {}).value || '';
+            return `${get('year')}-${get('month')}-${get('day')}`;
+          }
+
+          function rocCompactDateToIso(value) {
+            if (!/^\d{7}$/.test(value)) return null;
+            return `${Number(value.slice(0, 3)) + 1911}-${value.slice(3, 5)}-${value.slice(5, 7)}`;
+          }
+
+          function taipeiDateDaysAgo(daysAgo) {
+            const [year, month, day] = taipeiToday().split('-').map(Number);
+            return new Date(Date.UTC(year, month - 1, day - daysAgo)).toISOString().slice(0, 10);
+          }
+
+          async function fetchLatestDailyCloses() {
+            for (let daysAgo = 0; daysAgo < 10; daysAgo += 1) {
+              const date = taipeiDateDaysAgo(daysAgo);
+              const compactDate = date.replace(/-/g, '');
+              const attempt = await tryHosts(
+                `/rwd/zh/afterTrading/MI_INDEX?date=${compactDate}&type=ALLBUT0999&response=json`,
+                undefined,
+                async (response) => {
+                  const body = await response.json();
+                  return body && body.stat === 'OK' ? body : null;
+                },
+              );
+              const payload = attempt.value;
+              if (!payload) continue;
+              const table = (payload.tables || []).find(
+                (item) => item.fields && item.fields.includes('證券代號') && item.fields.includes('收盤價'),
+              );
+              if (!table) continue;
+              const codeIndex = table.fields.indexOf('證券代號');
+              const closingPriceIndex = table.fields.indexOf('收盤價');
+              const rows = table.data
+                .map((row) => ({ date, code: cleanText(row[codeIndex]), closingPrice: cleanText(row[closingPriceIndex]) }))
+                .filter((row) => row.code && row.closingPrice && row.closingPrice !== '--');
+              if (rows.length) return rows;
+            }
+
+            const response = await fetch('https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL');
+            if (!response.ok) throw new Error(`備援收盤行情來源回應 ${response.status}`);
+            const rows = await response.json();
+            return rows.flatMap((row) => {
+              const date = rocCompactDateToIso(row.Date);
+              return date ? [{ date, code: row.Code, closingPrice: row.ClosingPrice }] : [];
+            });
+          }
+
+          function rowDate(record) {
+            return record.exDate || '9999-12-31';
+          }
+
+          /* ------------------------------------------------------------------
+             以下是這支腳本相對 etf-radar 唯一新增的計算。
+             用的是已經抓回來的 records，不需要任何額外請求。
+
+             為什麼要做：用「最新一次配息 × 年配次數」推算年收入會嚴重高估。
+             例：某檔上季配 0.66、這季配 1.01，用 1.01 年化等於假設四季都配 1.01。
+             回推本金時會少算三、四成，是會讓人退休金不夠的等級的偏差。
+
+             所以改用實際發生的配息：
+               - 已滿一年（近 12 個月的配息次數 >= 年配次數）→ 直接用近 12 個月合計
+               - 還沒滿一年（新上市、或配息紀錄不足）→ 用已有紀錄的平均 × 年配次數推估，
+                 並標記 basis 為「推估」，讓頁面上可以標示提醒
+          ------------------------------------------------------------------ */
+          function buildTrailing(paidRecords, paymentsPerYear, today) {
+            const oneYearAgo = new Date(new Date(`${today}T00:00:00Z`).getTime() - 365 * 86400000)
+              .toISOString().slice(0, 10);
+            const within = paidRecords.filter((row) => row.exDate > oneYearAgo);
+            const sumWithin = within.reduce((total, row) => total + row.amount, 0);
+
+            if (!paidRecords.length || !paymentsPerYear) {
+              return { annual: null, sum12m: null, count12m: 0, basis: '尚無配息紀錄', complete: false };
+            }
+            // 近 12 個月的配息次數已達應配次數 → 這是真實的一年配息總額
+            if (within.length >= paymentsPerYear) {
+              return {
+                annual: Number(sumWithin.toFixed(4)),
+                sum12m: Number(sumWithin.toFixed(4)),
+                count12m: within.length,
+                basis: '近 12 個月實際配息',
+                complete: true,
+              };
+            }
+            // 資料不足一年 → 用手上有的紀錄取平均再年化，並標記為推估
+            const sample = (within.length ? within : paidRecords).slice(0, Math.max(paymentsPerYear, 1));
+            const average = sample.reduce((total, row) => total + row.amount, 0) / sample.length;
+            return {
+              annual: Number((average * paymentsPerYear).toFixed(4)),
+              sum12m: within.length ? Number(sumWithin.toFixed(4)) : null,
+              count12m: within.length,
+              basis: `配息紀錄不足一年，以近 ${sample.length} 次平均推估`,
+              complete: false,
+            };
+          }
+
+          async function buildPayload() {
+            const [highDividend, highLowVol, domesticPassive, domesticActive, dividendHtml, dailyCloses] = await Promise.all([
+              fetchProducts(HIGH_DIVIDEND_TAG),
+              fetchProducts(HIGH_DIVIDEND_LOW_VOL_TAG),
+              fetchDomesticEtfCodes('domestic'),
+              fetchDomesticEtfCodes('activeList'),
+              fetchFromTwse(
+                '配息來源',
+                '/zh/ETFortune-institute/dividendList',
+                undefined,
+                async (response) => {
+                  const html = await response.text();
+                  // 內容驗證：解析不到任何配息紀錄就當這台主機的頁面不對，換下一台
+                  return parseDividendRows(html).length ? html : null;
+                },
+              ),
+              fetchLatestDailyCloses(),
+            ]);
+
+            const domesticCodes = new Set([...domesticPassive, ...domesticActive]);
+            // 清單收錄兩個主題分類的全部商品（含投資國外者），國內／國外改用「投資地區」欄位標示
+            const productsByCode = new Map(
+              [...highDividend, ...highLowVol].map((item) => [item.stockNo, item]),
+            );
+            const closesByCode = new Map(dailyCloses.map((row) => [row.code, row]));
+            const trackedCodes = [...productsByCode.keys()]
+              .filter((code) => closesByCode.has(code))
+              .sort((a, b) => a.localeCompare(b));
+            if (!trackedCodes.length) throw new Error('官方分類暫時沒有可用的高息 ETF 商品');
+
+            const trackedCodeSet = new Set(trackedCodes);
+            const dividendRows = parseDividendRows(dividendHtml).filter((row) => trackedCodeSet.has(row.code));
+            const today = taipeiToday();
+
+            // 加分項：抓投信的收益分配公告來補「下次配息」。整段失敗也只是少了這一欄。
+            let announcedDividends = new Map();
+            try {
+              announcedDividends = await fetchAnnouncedDividends(trackedCodes, today);
+              console.log(`收益分配公告：補到 ${announcedDividends.size} 檔的下次配息`);
+            } catch (reason) {
+              console.warn(`收益分配公告掃描失敗，略過（不影響其他資料）：${reason && reason.message}`);
+            }
+
+            const etfs = trackedCodes.map((code) => {
+              const product = productsByCode.get(code);
+              const dailyClose = closesByCode.get(code);
+              const price = Number(String(dailyClose.closingPrice).replace(/,/g, ''));
+              if (!Number.isFinite(price)) throw new Error(`收盤行情格式異常：${code}`);
+
+              const records = dividendRows
+                .filter((row) => row.code === code && row.exDate)
+                .sort((a, b) => (b.exDate || '').localeCompare(a.exDate || ''));
+              const listedNext = [...records]
+                .filter((row) => row.exDate > today && row.amount !== null)
+                .sort((a, b) => rowDate(a).localeCompare(rowDate(b)))[0] || null;
+              const latestDividend = records.find((row) => row.exDate <= today && row.amount !== null) || null;
+
+              // 用公告補上下次配息：必須晚於今天，也必須晚於「最近一次配息」，避免兩欄重疊
+              let nextDividend = listedNext ? { amount: listedNext.amount, exDate: listedNext.exDate } : null;
+              let nextDividendSource = listedNext ? '證交所配息清單' : null;
+              const announced = announcedDividends.get(code);
+              if (
+                announced
+                && announced.exDate > today
+                && (!latestDividend || announced.exDate > latestDividend.exDate)
+                && (!nextDividend || announced.exDate < nextDividend.exDate)
+              ) {
+                nextDividend = { amount: announced.amount, exDate: announced.exDate };
+                nextDividendSource = '公告預估';
+              }
+              const description = (records.find((row) => row.description) || {}).description || '';
+              const frequency = FREQUENCY_OVERRIDES[code] || inferFrequency(records, description);
+              const placement = resolveRegion(code, product.stockName, domesticCodes);
+              const yieldDividend = nextDividend || latestDividend;
+              const annualizedYield = yieldDividend && yieldDividend.amount != null && price > 0
+                ? (yieldDividend.amount * frequency.times / price) * 100
+                : null;
+
+              /* ---- 新增：近 8 筆已除息紀錄 + 近 12 個月實際配息 ---- */
+              const paidRecords = records.filter((row) => row.exDate <= today && row.amount !== null);
+              const recentDividends = paidRecords.slice(0, 8).map((row) => ({
+                amount: row.amount,
+                exDate: row.exDate,
+                paymentDate: row.paymentDate,
+              }));
+              const trailing = buildTrailing(paidRecords, frequency.times, today);
+              const trailingYield = trailing.annual != null && price > 0
+                ? (trailing.annual / price) * 100
+                : null;
+              /* ---- 新增結束 ---- */
+
+              return {
+                code,
+                name: String(product.stockName).replace(/\(原簡稱:[^)]+\)/, '').trim(),
+                issuer: product.issuer,
+                region: placement.region,
+                regionDetail: placement.regionDetail,
+                price,
+                closeDate: dailyClose.date,
+                latestDividend: latestDividend ? { amount: latestDividend.amount, exDate: latestDividend.exDate } : null,
+                nextDividend,
+                nextDividendSource,
+                frequency: frequency.label,
+                frequencyBasis: frequency.basis,
+                paymentsPerYear: frequency.times,
+                annualizedYield,
+                yieldBasis: nextDividend
+                  ? (nextDividendSource === '公告預估' ? '下次配息（公告預估）' : '下次已公告配息')
+                  : latestDividend ? '最近一次配息' : null,
+                // 新增欄位
+                recentDividends,
+                trailingAnnualDividend: trailing.annual,
+                trailingYield,
+                trailing12mSum: trailing.sum12m,
+                trailing12mCount: trailing.count12m,
+                trailingBasis: trailing.basis,
+                trailingComplete: trailing.complete,
+                // 新增欄位結束
+                aumBillionTwd: Number(String(product.totalAv).replace(/,/g, '')) || 0,
+                hasIncomeEqualization: description.includes('收益平準金') || TITLE_CONFIRMED_EQUALIZATION.has(code),
+                equalizationBasis: description
+                  ? '官方收益分配條款'
+                  : TITLE_CONFIRMED_EQUALIZATION.has(code) ? '官方基金名稱與公開資料' : '未取得條款',
+                sourceUrl: `${TWSE}/zh/ETFortune-institute/etfInfo/${code}`,
+              };
+            });
+
+            return {
+              asOf: new Date().toISOString(),
+              marketStatus: '收盤',
+              scope: '每次同步依證交所「高股息」與「高息低波動」主題分類重建，收錄該分類下的全部臺灣掛牌 ETF；再與證交所「國內成分證券 ETF」及「國內主動式 ETF」官方清單比對，標示每一檔的投資地區。',
+              etfs,
+              sources: {
+                scope: `${TWSE}/zh/ETFortune-institute/products?tag=${encodeURIComponent('高股息')}`,
+                dividends: `${TWSE}/zh/ETFortune-institute/dividendList`,
+                prices: 'https://www.twse.com.tw/zh/trading/historical/mi-index.html',
+              },
+            };
+          }
+
+          const payload = await buildPayload();
+
+          if (!Array.isArray(payload.etfs) || payload.etfs.length === 0) {
+            throw new Error('抓到 0 檔 ETF，判定為異常，保留原本的 data.json 不覆寫');
+          }
+
+          await writeFile('data.json', JSON.stringify(payload, null, 1) + '\n', 'utf8');
+          console.log(`已寫入 data.json：${payload.etfs.length} 檔，資料時間 ${payload.asOf}`);
+          FETCH_SCRIPT_EOF
+
+      - name: 去證交所抓資料
+        run: node scripts/fetch.mjs
+
+      - name: 有變動才存回倉庫
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          if git diff --staged --quiet; then
+            echo "資料沒有變化，不需要提交"
+            exit 0
+          fi
+          git commit -m "自動更新 ETF 配息資料（$(TZ=Asia/Taipei date '+%Y-%m-%d %H:%M') 台北）"
+          # 抓資料期間若剛好有人推了別的變更（例如更新 index.html），push 會被拒絕。
+          # 這裡先把遠端的變更接到自己下面再重試，避免整批白做。
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "已推送（第 ${attempt} 次嘗試）"
+              exit 0
+            fi
+            echo "推送被拒，取回遠端變更後重試…"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            sleep 5
+          done
+          echo "連續 3 次推送失敗"
+          exit 1
