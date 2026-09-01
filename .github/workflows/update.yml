@@ -43,15 +43,19 @@ jobs:
            * 由 GitHub Actions 執行：去證交所抓高股息 ETF 資料，寫進 data.json。
            * 這支程式在 GitHub 的伺服器上跑，不是在你的瀏覽器裡跑，所以不會被 CORS 擋住。
            *
-           * 與 etf-radar 版本的差異（唯一差異，其餘照抄）：
-           *   多輸出 recentDividends（近 8 筆已除息紀錄）與 trailing12m*（近 12 個月合計），
-           *   讓「月領萬元」可以用實際年配息回推，而不是用單次配息年化。
-           *   這些資料本來就在記憶體裡，不需要多打任何一個請求。
+           * 與 etf-radar 版本的差異（其餘照抄）：
+           *   1. 多輸出 recentDividends 與 trailing*（近 12 個月實際配息），
+           *      讓「月領萬元」可以用實際年配息回推，而不是用單次配息年化。
+           *   2. 證交所的配息清單只提供「當年度」的紀錄（每年 1 月會歸零），
+           *      所以這裡做兩件事把歷史補起來：
+           *        a) 讀取上一版 data.json，把既有的配息紀錄接續下去（累積式）
+           *        b) 對「近一年紀錄還不足」的檔位，另外去抓個股資訊頁補近 4 筆（會跨年度）
+           *      補齊之後就不會再去打擾證交所，請求量會隨時間自己降下來。
            *
            * 本機想手動測試：node scripts/fetch.mjs
            */
 
-          import { writeFile } from 'node:fs/promises';
+          import { readFile, writeFile } from 'node:fs/promises';
 
           // 證交所有多台主機，且不是每一台都提供全部頁面（wwwc 曾把配息頁下架回 404），
           // 所以每個請求都依序輪流嘗試，全部失敗才放棄。
@@ -424,16 +428,97 @@ jobs:
                - 還沒滿一年（新上市、或配息紀錄不足）→ 用已有紀錄的平均 × 年配次數推估，
                  並標記 basis 為「推估」，讓頁面上可以標示提醒
           ------------------------------------------------------------------ */
-          function buildTrailing(paidRecords, paymentsPerYear, today) {
+          const HISTORY_KEEP = 24;        // 每檔最多保留幾筆歷史配息
+          const ETFINFO_MAX_FETCH = 60;   // 單次執行最多去個股頁補幾檔
+          const ETFINFO_DELAY_MS = 1200;  // 每次之間的間隔，避免對證交所造成負擔
+
+          // 一筆配息以「發放日」為準（實際入帳的月份，也是月領試算真正在意的日子）。
+          // 沒有發放日的紀錄一律不收進歷史，確保 key 空間一致、不會重複計算同一次配息。
+          const recordKey = (row) => (row && row.paymentDate) || null;
+
+          function mergeRecords(...lists) {
+            const byKey = new Map();
+            for (const list of lists) {
+              for (const row of list || []) {
+                const key = recordKey(row);
+                if (!key || row.amount == null || !Number.isFinite(Number(row.amount))) continue;
+                const prev = byKey.get(key);
+                byKey.set(key, {
+                  amount: Number(row.amount),
+                  exDate: row.exDate || (prev && prev.exDate) || null,
+                  paymentDate: key,
+                });
+              }
+            }
+            return [...byKey.values()]
+              .sort((a, b) => b.paymentDate.localeCompare(a.paymentDate))
+              .slice(0, HISTORY_KEEP);
+          }
+
+          // 「近 12 個月實際入帳」的視窗，兩端都要卡：
+          // 已經除息但還沒發放的那一筆，發放日會落在今天之後（例如 8/19 除息、9/14 才發），
+          // 若不設上限就會多算一次，月配 ETF 會變成用 13 次配息當作一年。
+          function withinLastYear(history, today) {
             const oneYearAgo = new Date(new Date(`${today}T00:00:00Z`).getTime() - 365 * 86400000)
               .toISOString().slice(0, 10);
-            const within = paidRecords.filter((row) => row.exDate > oneYearAgo);
+            return history.filter((row) => row.paymentDate > oneYearAgo && row.paymentDate <= today);
+          }
+
+          /* ---- 個股資訊頁：補「近 4 筆」配息（含跨年度的那幾筆） ----
+             這個表格只有「收益分配發放日」與金額，沒有除息日，所以合併時以發放日為 key。
+             解析失敗、頁面改版、找不到表格都只會少補幾筆，不會讓整個排程失敗。       */
+          function looseDateToIso(value) {
+            const text = cleanText(value);
+            let match = text.match(/^(\d{4})\s*[\/\-年]\s*(\d{1,2})\s*[\/\-月]\s*(\d{1,2})/);
+            if (match) return `${match[1]}-${match[2].padStart(2, '0')}-${match[3].padStart(2, '0')}`;
+            match = text.match(/^(\d{2,3})\s*[\/\-年]\s*(\d{1,2})\s*[\/\-月]\s*(\d{1,2})/);
+            if (match && Number(match[1]) >= 90 && Number(match[1]) <= 199) {
+              return `${Number(match[1]) + 1911}-${match[2].padStart(2, '0')}-${match[3].padStart(2, '0')}`;
+            }
+            return null;
+          }
+
+          function parseEtfInfoDividends(html) {
+            const anchor = html.search(/收益分配發放日|配息狀況/);
+            const slice = anchor >= 0 ? html.slice(anchor, anchor + 20000) : html;
+            const cells = [...slice.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((cell) => cleanText(cell[1]));
+            const out = [];
+            for (let i = 0; i < cells.length - 1; i += 1) {
+              const paymentDate = looseDateToIso(cells[i]);
+              if (!paymentDate) continue;
+              const amount = Number(cells[i + 1].replace(/[,元\s]/g, ''));
+              // 每單位配息不會是大數字；設上限可避免把「淨值」之類的欄位誤認成配息
+              if (!Number.isFinite(amount) || amount <= 0 || amount > 10) continue;
+              out.push({ amount, exDate: null, paymentDate });
+            }
+            return out;
+          }
+
+          async function fetchEtfInfoDividends(code) {
+            try {
+              const attempt = await tryHosts(
+                `/zh/ETFortune-institute/etfInfo/${encodeURIComponent(code)}`,
+                undefined,
+                async (response) => {
+                  const rows = parseEtfInfoDividends(await response.text());
+                  return rows.length ? rows : null;
+                },
+              );
+              return attempt.value || [];
+            } catch (reason) {
+              console.warn(`  ${code} 個股頁補歷史失敗，略過：${reason && reason.message}`);
+              return [];
+            }
+          }
+
+          function buildTrailing(history, paymentsPerYear, today) {
+            const within = withinLastYear(history, today);
             const sumWithin = within.reduce((total, row) => total + row.amount, 0);
 
-            if (!paidRecords.length || !paymentsPerYear) {
+            if (!history.length || !paymentsPerYear) {
               return { annual: null, sum12m: null, count12m: 0, basis: '尚無配息紀錄', complete: false };
             }
-            // 近 12 個月的配息次數已達應配次數 → 這是真實的一年配息總額
+            // 近 12 個月的入帳次數已達應配次數 → 這是真實的一年配息總額
             if (within.length >= paymentsPerYear) {
               return {
                 annual: Number(sumWithin.toFixed(4)),
@@ -444,7 +529,7 @@ jobs:
               };
             }
             // 資料不足一年 → 用手上有的紀錄取平均再年化，並標記為推估
-            const sample = (within.length ? within : paidRecords).slice(0, Math.max(paymentsPerYear, 1));
+            const sample = (within.length ? within : history).slice(0, Math.max(paymentsPerYear, 1));
             const average = sample.reduce((total, row) => total + row.amount, 0) / sample.length;
             return {
               annual: Number((average * paymentsPerYear).toFixed(4)),
@@ -498,15 +583,64 @@ jobs:
               console.warn(`收益分配公告掃描失敗，略過（不影響其他資料）：${reason && reason.message}`);
             }
 
+            /* ---- 建立每一檔的配息歷史 ----
+               證交所的配息清單只給「當年度」的紀錄，每年 1 月會歸零，光靠它永遠湊不滿 12 個月。
+               所以先把上一版 data.json 的紀錄接下來，再和這次抓到的合併。
+               這樣歷史會隨每天的更新自己累積，而且跨年不會斷。                        */
+            const previousHistory = new Map();
+            try {
+              const old = JSON.parse(await readFile('data.json', 'utf8'));
+              for (const item of old.etfs || []) {
+                if (Array.isArray(item.recentDividends)) previousHistory.set(item.code, item.recentDividends);
+              }
+              console.log(`沿用舊 data.json 的配息歷史：${previousHistory.size} 檔`);
+            } catch (reason) {
+              console.log('沒有可用的舊 data.json（第一次執行時屬正常），從頭開始累積歷史');
+            }
+
+            const prepared = new Map();
+            for (const code of trackedCodes) {
+              const records = dividendRows
+                .filter((row) => row.code === code && row.exDate)
+                .sort((a, b) => (b.exDate || '').localeCompare(a.exDate || ''));
+              const description = (records.find((row) => row.description) || {}).description || '';
+              const frequency = FREQUENCY_OVERRIDES[code] || inferFrequency(records, description);
+              const paid = records.filter((row) => row.exDate <= today && row.amount !== null);
+              prepared.set(code, {
+                records, description, frequency,
+                history: mergeRecords(previousHistory.get(code), paid),
+              });
+            }
+
+            /* 只對「近一年入帳次數還不夠」的檔位去抓個股頁補歷史。
+               補齊之後就不會再抓，所以請求量會隨時間自己降到接近零。 */
+            const needMore = trackedCodes.filter((code) => {
+              const item = prepared.get(code);
+              return item.frequency.times > 0
+                && withinLastYear(item.history, today).length < item.frequency.times;
+            });
+            console.log(`歷史配息不足一年、需要補的：${needMore.length} 檔`);
+            let filled = 0;
+            for (const code of needMore.slice(0, ETFINFO_MAX_FETCH)) {
+              const extra = await fetchEtfInfoDividends(code);
+              if (extra.length) {
+                const item = prepared.get(code);
+                const before = item.history.length;
+                item.history = mergeRecords(item.history, extra);
+                if (item.history.length > before) filled += 1;
+              }
+              await sleep(ETFINFO_DELAY_MS);
+            }
+            console.log(`從個股頁補到新紀錄的：${filled} 檔`);
+
             const etfs = trackedCodes.map((code) => {
               const product = productsByCode.get(code);
               const dailyClose = closesByCode.get(code);
               const price = Number(String(dailyClose.closingPrice).replace(/,/g, ''));
               if (!Number.isFinite(price)) throw new Error(`收盤行情格式異常：${code}`);
 
-              const records = dividendRows
-                .filter((row) => row.code === code && row.exDate)
-                .sort((a, b) => (b.exDate || '').localeCompare(a.exDate || ''));
+              const prep = prepared.get(code);
+              const records = prep.records;
               const listedNext = [...records]
                 .filter((row) => row.exDate > today && row.amount !== null)
                 .sort((a, b) => rowDate(a).localeCompare(rowDate(b)))[0] || null;
@@ -525,22 +659,17 @@ jobs:
                 nextDividend = { amount: announced.amount, exDate: announced.exDate };
                 nextDividendSource = '公告預估';
               }
-              const description = (records.find((row) => row.description) || {}).description || '';
-              const frequency = FREQUENCY_OVERRIDES[code] || inferFrequency(records, description);
+              const description = prep.description;
+              const frequency = prep.frequency;
               const placement = resolveRegion(code, product.stockName, domesticCodes);
               const yieldDividend = nextDividend || latestDividend;
               const annualizedYield = yieldDividend && yieldDividend.amount != null && price > 0
                 ? (yieldDividend.amount * frequency.times / price) * 100
                 : null;
 
-              /* ---- 新增：近 8 筆已除息紀錄 + 近 12 個月實際配息 ---- */
-              const paidRecords = records.filter((row) => row.exDate <= today && row.amount !== null);
-              const recentDividends = paidRecords.slice(0, 8).map((row) => ({
-                amount: row.amount,
-                exDate: row.exDate,
-                paymentDate: row.paymentDate,
-              }));
-              const trailing = buildTrailing(paidRecords, frequency.times, today);
+              /* ---- 新增：累積的配息歷史 + 近 12 個月實際配息 ---- */
+              const recentDividends = prep.history;
+              const trailing = buildTrailing(recentDividends, frequency.times, today);
               const trailingYield = trailing.annual != null && price > 0
                 ? (trailing.annual / price) * 100
                 : null;
