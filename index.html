@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高息 ETF 月領試算</title>
+<meta name="description" content="以證交所公開資料試算：月領一萬元需要持有多少張高股息 ETF、需要多少本金。">
+<style>
+  :root{
+    color-scheme: light;
+    --plane:#f9f9f7; --surface:#fcfcfb; --surface-2:#f2f2ee;
+    --ink:#0b0b0b; --ink-2:#52514e; --ink-muted:#898781;
+    --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,.10);
+    --accent:#2a78d6; --good:#0ca30c; --warn:#fab219; --crit:#d03b3b;
+    --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100;
+    --s5:#e87ba4; --s6:#008300; --s7:#4a3aa7; --s8:#e34948;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --plane:#0d0d0d; --surface:#1a1a19; --surface-2:#232322;
+      --ink:#ffffff; --ink-2:#c3c2b7; --ink-muted:#898781;
+      --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
+      --accent:#3987e5;
+      --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500;
+      --s5:#d55181; --s6:#008300; --s7:#9085e9; --s8:#e66767;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --plane:#0d0d0d; --surface:#1a1a19; --surface-2:#232322;
+    --ink:#ffffff; --ink-2:#c3c2b7; --ink-muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
+    --accent:#3987e5;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500;
+    --s5:#d55181; --s6:#008300; --s7:#9085e9; --s8:#e66767;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--plane); color:var(--ink);
+    font:15px/1.6 system-ui,-apple-system,"Segoe UI","Noto Sans TC",sans-serif;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:24px 16px 72px}
+  a{color:var(--accent)}
+
+  header.top{display:flex; flex-wrap:wrap; gap:12px; align-items:baseline; justify-content:space-between; margin-bottom:4px}
+  h1{font-size:22px; margin:0; letter-spacing:-.01em}
+  .sub{color:var(--ink-2); font-size:13px; margin:2px 0 20px}
+  .asof{font-size:12px; color:var(--ink-muted); font-variant-numeric:tabular-nums}
+  .themebtn{background:none;border:1px solid var(--border);color:var(--ink-2);border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer}
+  .themebtn:hover{background:var(--surface-2)}
+
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:18px}
+  .card + .card{margin-top:16px}
+
+  /* ---- controls ---- */
+  .controls{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:18px 22px}
+  .field{min-width:0}
+  .label{display:block; font-size:12px; font-weight:600; color:var(--ink-2); margin-bottom:6px; letter-spacing:.02em}
+  .hint{font-size:11.5px; color:var(--ink-muted); margin-top:5px; line-height:1.45}
+  input[type=number], select{
+    width:100%; padding:9px 10px; font:inherit; font-variant-numeric:tabular-nums;
+    background:var(--plane); color:var(--ink);
+    border:1px solid var(--border); border-radius:9px;
+  }
+  input[type=number]:focus, select:focus{outline:2px solid var(--accent); outline-offset:1px}
+  .chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:7px}
+  .chip{
+    border:1px solid var(--border); background:var(--plane); color:var(--ink-2);
+    border-radius:999px; padding:4px 11px; font-size:12px; cursor:pointer; font-variant-numeric:tabular-nums;
+  }
+  .chip:hover{border-color:var(--accent); color:var(--ink)}
+  .chip[aria-pressed=true]{background:var(--accent); border-color:var(--accent); color:#fff}
+  .seg{display:flex; border:1px solid var(--border); border-radius:9px; overflow:hidden}
+  .seg button{
+    flex:1; padding:9px 6px; font:inherit; font-size:13px; cursor:pointer;
+    background:var(--plane); color:var(--ink-2); border:0; border-right:1px solid var(--border);
+  }
+  .seg button:last-child{border-right:0}
+  .seg button[aria-pressed=true]{background:var(--accent); color:#fff; font-weight:600}
+  .check{display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--ink-2); cursor:pointer; padding-top:2px}
+  .check input{width:16px;height:16px;accent-color:var(--accent)}
+
+  /* ---- basis notice ---- */
+  .notice{
+    display:flex; gap:10px; align-items:flex-start;
+    margin-top:16px; padding:11px 13px; border-radius:10px;
+    background:var(--surface-2); border:1px solid var(--border); font-size:12.5px; color:var(--ink-2); line-height:1.55;
+  }
+  .notice .ico{flex:none; font-weight:700; font-size:13px}
+  .notice.warn .ico{color:var(--warn)}
+  .notice strong{color:var(--ink)}
+
+  /* ---- tabs ---- */
+  .tabs{display:flex; gap:4px; margin:22px 0 14px; border-bottom:1px solid var(--border)}
+  .tabs button{
+    background:none; border:0; border-bottom:2px solid transparent; margin-bottom:-1px;
+    padding:9px 14px; font:inherit; font-size:14px; color:var(--ink-muted); cursor:pointer;
+  }
+  .tabs button[aria-selected=true]{color:var(--ink); font-weight:600; border-bottom-color:var(--accent)}
+
+  /* ---- table ---- */
+  .tablewrap{overflow-x:auto; margin:0 -18px; padding:0 18px}
+  table{width:100%; border-collapse:collapse; font-size:13.5px; font-variant-numeric:tabular-nums}
+  th,td{padding:9px 10px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--grid)}
+  th{
+    font-size:11.5px; font-weight:600; color:var(--ink-muted); letter-spacing:.03em;
+    text-align:right; position:sticky; top:0; background:var(--surface); cursor:pointer; user-select:none;
+    border-bottom:1px solid var(--axis);
+  }
+  th:hover{color:var(--ink)}
+  th.nosort{cursor:default}
+  th:first-child, td:first-child{text-align:left; position:sticky; left:0; background:var(--surface); z-index:1}
+  th:first-child{z-index:3}
+  tbody tr:hover td{background:var(--surface-2)}
+  tbody tr:hover td:first-child{background:var(--surface-2)}
+  .code{font-weight:600}
+  .nm{color:var(--ink-2); font-size:12px; display:block; font-weight:400}
+  .num{font-weight:500}
+  .big{font-weight:600}
+  .dim{color:var(--ink-muted)}
+  .sortmark{color:var(--accent); font-size:10px}
+  .tag{
+    display:inline-block; font-size:10.5px; padding:1px 6px; border-radius:5px; margin-left:4px;
+    border:1px solid var(--border); color:var(--ink-muted); vertical-align:1px;
+  }
+  .tag.est{color:var(--warn); border-color:var(--warn)}
+  .tag.fx{color:var(--s7); border-color:var(--s7)}
+
+  /* ---- combo ---- */
+  .pickgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:8px; max-height:260px; overflow:auto; padding:2px}
+  .pick{
+    display:flex; gap:8px; align-items:center; padding:8px 10px; border:1px solid var(--border);
+    border-radius:9px; cursor:pointer; background:var(--plane); font-size:13px;
+  }
+  .pick:hover{border-color:var(--accent)}
+  .pick input{accent-color:var(--accent); width:15px; height:15px; flex:none}
+  .pick .swatch{width:9px;height:9px;border-radius:2px;flex:none}
+  .pick .pn{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .pick .py{margin-left:auto; color:var(--ink-muted); font-size:11.5px; font-variant-numeric:tabular-nums; flex:none}
+
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:14px; margin:18px 0}
+  .kpi{background:var(--plane); border:1px solid var(--border); border-radius:11px; padding:12px 14px}
+  .kpi .k{font-size:11.5px; color:var(--ink-muted); letter-spacing:.03em}
+  .kpi .v{font-size:21px; font-weight:600; margin-top:3px; letter-spacing:-.02em}
+  .kpi .v small{font-size:12px; font-weight:400; color:var(--ink-2); margin-left:2px}
+  .kpi.alert .v{color:var(--crit)}
+
+  /* chart */
+  .chart{margin-top:6px}
+  .chartbody{display:flex; align-items:flex-end; gap:2px; height:230px; padding:8px 0 0 52px; position:relative}
+  .gridline{position:absolute; left:52px; right:0; border-top:1px solid var(--grid); pointer-events:none}
+  .gridline span{position:absolute; right:100%; top:-8px; font-size:10.5px; color:var(--ink-muted); padding-right:8px; white-space:nowrap; font-variant-numeric:tabular-nums}
+  .targetline{position:absolute; left:52px; right:0; border-top:2px dashed var(--accent); pointer-events:none; z-index:2}
+  .targetline span{position:absolute; right:0; top:-16px; font-size:10.5px; color:var(--accent); background:var(--surface); padding:0 4px; font-weight:600}
+  .col{flex:1; display:flex; flex-direction:column; justify-content:flex-end; height:100%; position:relative; min-width:0; cursor:default}
+  .stack{display:flex; flex-direction:column-reverse; width:100%; border-radius:4px 4px 0 0; overflow:hidden}
+  .seg-bar{width:100%; border-top:2px solid var(--surface)}
+  .seg-bar:first-child{border-top:0}
+  .col.short .stack{outline:2px solid var(--crit); outline-offset:1px; border-radius:4px}
+  .col.empty::after{
+    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+    background:repeating-linear-gradient(45deg,var(--crit),var(--crit) 3px,transparent 3px,transparent 6px);
+  }
+  .xaxis{display:flex; gap:2px; border-top:1px solid var(--axis); padding:6px 0 0 52px; margin-top:0}
+  .xaxis div{flex:1; text-align:center; font-size:11px; color:var(--ink-muted); min-width:0; font-variant-numeric:tabular-nums}
+  .xaxis div.bad{color:var(--crit); font-weight:600}
+  .legend{display:flex; flex-wrap:wrap; gap:6px 16px; margin-top:14px; font-size:12px; color:var(--ink-2)}
+  .legend span.li{display:flex; align-items:center; gap:6px}
+  .legend i{width:10px;height:10px;border-radius:2px;display:block}
+  .tip{
+    position:fixed; z-index:50; pointer-events:none; opacity:0; transition:opacity .1s;
+    background:var(--surface); border:1px solid var(--axis); border-radius:9px; padding:9px 11px;
+    font-size:12px; box-shadow:0 6px 22px rgba(0,0,0,.18); min-width:150px; font-variant-numeric:tabular-nums;
+  }
+  .tip.on{opacity:1}
+  .tip b{display:block; margin-bottom:5px; font-size:12.5px}
+  .tip .r{display:flex; justify-content:space-between; gap:14px}
+  .tip .r i{width:8px;height:8px;border-radius:2px;display:inline-block;margin-right:5px}
+  .tip .tot{border-top:1px solid var(--grid); margin-top:5px; padding-top:5px; font-weight:600}
+
+  .btnrow{display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 4px}
+  .btn{
+    padding:8px 14px; border-radius:9px; border:1px solid var(--border); background:var(--plane);
+    color:var(--ink); font:inherit; font-size:13px; cursor:pointer;
+  }
+  .btn:hover{border-color:var(--accent)}
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600}
+  .btn.primary:hover{filter:brightness(1.06)}
+
+  .lotrow{display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid var(--grid); font-size:13px}
+  .lotrow:last-child{border-bottom:0}
+  .lotrow .sw{width:10px;height:10px;border-radius:2px;flex:none}
+  .lotrow .nmz{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .lotrow input{width:78px; text-align:right}
+  .lotrow .cost{width:110px; text-align:right; color:var(--ink-2); font-variant-numeric:tabular-nums; flex:none}
+  .lotrow .mth{width:150px; text-align:right; color:var(--ink-muted); font-size:11.5px; flex:none}
+
+  details.expl{margin-top:16px; border:1px solid var(--border); border-radius:12px; background:var(--surface)}
+  details.expl summary{padding:13px 18px; cursor:pointer; font-size:14px; font-weight:600; list-style:none}
+  details.expl summary::-webkit-details-marker{display:none}
+  details.expl summary::before{content:'▸ '; color:var(--ink-muted)}
+  details.expl[open] summary::before{content:'▾ '}
+  details.expl .body{padding:0 18px 18px; font-size:13px; color:var(--ink-2); line-height:1.7}
+  details.expl h3{font-size:13px; margin:16px 0 5px; color:var(--ink)}
+  details.expl ul{margin:5px 0; padding-left:20px}
+  details.expl code{background:var(--surface-2); padding:1px 5px; border-radius:4px; font-size:12px}
+
+  footer{margin-top:30px; font-size:11.5px; color:var(--ink-muted); line-height:1.7}
+  .empty-state{padding:40px 16px; text-align:center; color:var(--ink-muted); font-size:14px}
+  .empty-state code{background:var(--surface-2); padding:2px 6px; border-radius:4px}
+  .sronly{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  @media (max-width:640px){
+    .wrap{padding:16px 12px 60px}
+    .card{padding:14px}
+    .tablewrap{margin:0 -14px; padding:0 14px}
+    .lotrow .mth{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div>
+      <h1>高息 ETF 月領試算</h1>
+      <div class="asof" id="asof">載入中…</div>
+    </div>
+    <button class="themebtn" id="themebtn" type="button">切換深色</button>
+  </header>
+  <p class="sub">輸入想要的每月現金流，回推每一檔需要持有幾張、需要多少本金。資料為證交所公開的盤後收盤價與官方配息紀錄。</p>
+
+  <!-- ============ 控制列 ============ -->
+  <section class="card">
+    <div class="controls">
+      <div class="field">
+        <label class="label" for="target">目標月現金流（稅後，元）</label>
+        <input type="number" id="target" value="10000" min="1000" step="1000">
+        <div class="chips" id="targetChips">
+          <button class="chip" type="button" data-v="10000">1 萬</button>
+          <button class="chip" type="button" data-v="20000">2 萬</button>
+          <button class="chip" type="button" data-v="30000">3 萬</button>
+          <button class="chip" type="button" data-v="50000">5 萬</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="label">配息基準</span>
+        <div class="seg" id="basisSeg" role="group" aria-label="配息基準">
+          <button type="button" data-v="trailing" aria-pressed="true">近一年實際</button>
+          <button type="button" data-v="latest" aria-pressed="false">最新配息年化</button>
+        </div>
+        <div class="hint" id="basisHint"></div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="marginal">綜所稅邊際稅率</label>
+        <select id="marginal">
+          <option value="-1">不計稅費（只看配息毛額）</option>
+          <option value="5">5％</option>
+          <option value="12" selected>12％</option>
+          <option value="20">20％</option>
+          <option value="30">30％</option>
+          <option value="40">40％</option>
+        </select>
+        <div class="hint">股利併入綜所稅、可抵減 8.5％；超過 28％ 時自動改用分開計稅。國外成分 ETF 屬海外所得，此處以 0％ 計。</div>
+      </div>
+
+      <div class="field">
+        <span class="label">計算方式</span>
+        <label class="check"><input type="checkbox" id="nhi" checked> 計入二代健保補充保費 2.11％</label>
+        <label class="check"><input type="checkbox" id="wholeLot" checked> 只買整張（1 張 = 1000 股）</label>
+        <div class="hint">補充保費以「單次配息滿 20,000 元」為課徵門檻，未達門檻不課。</div>
+      </div>
+    </div>
+
+    <div class="notice warn" id="basisNotice">
+      <span class="ico">!</span>
+      <div id="basisNoticeText"></div>
+    </div>
+  </section>
+
+  <!-- ============ 分頁 ============ -->
+  <div class="tabs" role="tablist">
+    <button role="tab" id="tab-single" aria-selected="true" aria-controls="panel-single">單檔試算</button>
+    <button role="tab" id="tab-combo" aria-selected="false" aria-controls="panel-combo">組合試算（鋪平 12 個月）</button>
+  </div>
+
+  <!-- ============ 單檔 ============ -->
+  <section class="card" id="panel-single" role="tabpanel" aria-labelledby="tab-single">
+    <div class="controls" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:14px 18px; margin-bottom:16px">
+      <div class="field">
+        <label class="label" for="fRegion">投資地區</label>
+        <select id="fRegion"><option value="">全部</option><option value="國內">國內成分</option><option value="國外">國外成分</option></select>
+      </div>
+      <div class="field">
+        <label class="label" for="fFreq">配息頻率</label>
+        <select id="fFreq"><option value="">全部</option></select>
+      </div>
+      <div class="field">
+        <label class="label" for="fAum">規模門檻（億元）</label>
+        <select id="fAum">
+          <option value="0">不限</option><option value="50">50 億以上</option>
+          <option value="100" selected>100 億以上</option><option value="500">500 億以上</option>
+        </select>
+      </div>
+      <div class="field">
+        <span class="label">資料完整度</span>
+        <label class="check"><input type="checkbox" id="fComplete"> 只看配息滿一年的</label>
+      </div>
+    </div>
+
+    <div class="notice" style="margin:0 0 16px">
+      <span class="ico">i</span>
+      <div>「實際稅後月均」是<strong>一整年的現金流除以 12</strong>，不是每個月都領得到這個數。季配的 ETF 一年只入帳 4 次、半年配只有 2 次——單押一檔，多數月份是零。要真的每月都有錢進來，請用上面的<strong>組合試算</strong>。</div>
+    </div>
+
+    <div class="tablewrap">
+      <table id="tbl">
+        <thead><tr>
+          <th class="nosort" data-k="name">ETF</th>
+          <th data-k="price">收盤價</th>
+          <th data-k="annual">年配息/股</th>
+          <th data-k="yieldPct">年化殖利率</th>
+          <th data-k="lots">需要張數</th>
+          <th data-k="cost">所需本金</th>
+          <th data-k="netMonthly">實際稅後月均</th>
+          <th data-k="aum">規模(億)</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="empty-state" id="singleEmpty" hidden></div>
+  </section>
+
+  <!-- ============ 組合 ============ -->
+  <section class="card" id="panel-combo" role="tabpanel" aria-labelledby="tab-combo" hidden>
+    <span class="label">選擇要組合的 ETF（最多 8 檔）</span>
+    <div class="hint" style="margin:0 0 10px">多數高股息 ETF 是季配，一年只入帳 4 次。要每個月都有錢進來，得靠除息月份不同的標的互相補位。</div>
+    <div class="pickgrid" id="pickgrid"></div>
+
+    <div class="btnrow">
+      <button class="btn primary" type="button" id="autoBtn">自動配置到目標</button>
+      <button class="btn" type="button" id="clearBtn">清空張數</button>
+    </div>
+
+    <div id="comboEmpty" class="empty-state">先在上面勾選 2 檔以上，再按「自動配置到目標」。</div>
+
+    <div id="comboBody" hidden>
+      <div class="kpis" id="kpis"></div>
+
+      <div class="chart">
+        <div class="chartbody" id="chartbody"></div>
+        <div class="xaxis" id="xaxis"></div>
+        <div class="legend" id="legend"></div>
+      </div>
+
+      <div style="margin-top:22px">
+        <span class="label">逐檔張數（可手動微調）</span>
+        <div id="lotlist"></div>
+      </div>
+
+      <details class="expl" style="margin-top:14px">
+        <summary>以表格檢視每月現金流</summary>
+        <div class="body tablewrap">
+          <table id="monthTbl"><thead><tr><th class="nosort">入帳月</th><th class="nosort">稅後金額</th><th class="nosort">與目標差額</th></tr></thead><tbody id="monthTbody"></tbody></table>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============ 說明 ============ -->
+  <details class="expl">
+    <summary>計算方式與注意事項</summary>
+    <div class="body">
+      <h3>配息基準：兩種算法差很多</h3>
+      <ul>
+        <li><strong>近一年實際</strong>（預設）＝ 近 12 個月真正配出來的金額合計。若某檔掛牌未滿一年、配息紀錄不足，改以現有紀錄平均推估，並在表格標上 <span class="tag est">推估</span>。</li>
+        <li><strong>最新配息年化</strong> ＝ 最近一次（或已公告的下次）配息 × 年配息次數。這是各家網站最常見的「年化殖利率」，但它假設接下來每一次都配一樣多。高股息 ETF 單次配息忽高忽低很常見，用這個回推本金通常會<strong>低估需求</strong>。</li>
+      </ul>
+      <p>兩個都看，落差越大代表這檔配息越不穩定。</p>
+
+      <h3>稅費怎麼算</h3>
+      <ul>
+        <li><strong>二代健保補充保費</strong>：單次配息給付達 20,000 元時，就該次全額扣 2.11％；未達門檻不扣。所以季配（單筆大）比月配（單筆小）更容易被課到。</li>
+        <li><strong>股利所得稅（國內成分）</strong>：以「合併計稅 + 8.5％ 抵減」估算，有效稅率＝邊際稅率 − 8.5％；當邊際稅率超過 28％ 時改用分開計稅 28％。邊際稅率 5％、12％ 者實際上可能退稅，此處保守以 0％ 計，不計入退稅利益。抵減稅額每戶上限 8 萬元未納入計算。</li>
+        <li><strong>國外成分 ETF</strong>（表格標 <span class="tag fx">海外</span>）：配息屬海外所得，不課二代健保、不併入綜所稅，僅計入最低稅負制。一般家庭在免稅額度內多半為 0，此處以 0％ 計。金額大者請自行確認。</li>
+      </ul>
+
+      <h3>組合試算的月份怎麼推</h3>
+      <p>以官方配息紀錄的<strong>發放日</strong>（實際入帳月）推算，沒有發放日就用除息日往後推一個月。再依配息頻率補齊整年的月份。投信有可能調整配息時程，僅供規劃參考。</p>
+      <p>「自動配置」會反覆找出目前現金流最少的月份，加買一張在該月有配息、且每元本金貢獻最高的 ETF，直到所有月份都達標。這是求可行解，不是最省本金的最佳解。</p>
+
+      <h3>這個試算沒有涵蓋的事</h3>
+      <ul>
+        <li><strong>填息與否</strong>：配息會從淨值扣掉。沒填息就是左手換右手，本金同步縮水。</li>
+        <li><strong>配息不保證</strong>：ETF 沒有義務維持配息水準，成分股減配、市場下跌時都可能調降。</li>
+        <li><strong>收益平準金</strong>：標 <span class="tag">平準金</span> 者可在收益不足時動用平準金維持配息，形同部分配還本金，殖利率會失真。</li>
+        <li>手續費、證交稅、匯費、股價波動造成的資本利得或損失。</li>
+      </ul>
+      <p style="margin-top:14px"><strong>本頁為公開資料的算術試算，不是投資建議，也不構成任何收益保證。</strong>實際配息、稅務與個人情況請以投信公告與稅務專業意見為準。</p>
+    </div>
+  </details>
+
+  <footer>
+    資料來源：臺灣證券交易所「高股息／高息低波動」主題分類、官方配息紀錄、收益分配公告、盤後收盤行情。
+    每日台北時間 09:25、14:25、19:25 自動更新，收盤價為盤後 T+1 資料，非即時報價。
+  </footer>
+</div>
+
+<div class="tip" id="tip"></div>
+
+<script>
+(() => {
+'use strict';
+
+/* ---------- 常數 ---------- */
+const NHI_RATE = 0.0211;          // 二代健保補充保費費率
+const NHI_MIN  = 20000;           // 單次給付課徵門檻（元）
+const DIV_CREDIT = 8.5;           // 股利可抵減率（％）
+const SEP_TAX = 28;               // 分開計稅稅率（％）
+const SHARES_PER_LOT = 1000;
+const MAX_PICK = 8;
+const SERIES = ['--s1','--s2','--s3','--s4','--s5','--s6','--s7','--s8'];
+
+/* ---------- 狀態 ---------- */
+let DATA = null;
+let ROWS = [];
+const cfg = { target:10000, basis:'trailing', marginal:12, nhi:true, wholeLot:true };
+let sortKey = 'cost', sortDir = 1;
+const picked = [];                 // 已勾選的代號（顯示順序）
+const lots = new Map();            // code -> 張數
+const slotOf = new Map();          // code -> 顏色槽位；取消勾選才釋放，讓其他檔的顏色不會跟著位移
+
+/* ---------- 小工具 ---------- */
+const $ = (id) => document.getElementById(id);
+const nf0 = new Intl.NumberFormat('zh-TW',{maximumFractionDigits:0});
+const nf2 = new Intl.NumberFormat('zh-TW',{minimumFractionDigits:2,maximumFractionDigits:2});
+const money = (n) => (n==null||!isFinite(n)) ? '—' : nf0.format(Math.round(n));
+const pct = (n) => (n==null||!isFinite(n)) ? '—' : nf2.format(n)+'%';
+const colorAt = (i) => `var(${SERIES[i % SERIES.length]})`;
+const colorOf = (code) => colorAt(slotOf.has(code) ? slotOf.get(code) : 0);
+function claimSlot(code){
+  if(slotOf.has(code)) return;
+  const used = new Set(slotOf.values());
+  for(let i=0;i<SERIES.length;i++) if(!used.has(i)){ slotOf.set(code,i); return; }
+  slotOf.set(code, slotOf.size % SERIES.length);
+}
+function wan(n){ // 以「萬」為單位的簡寫
+  if(n==null||!isFinite(n)) return '—';
+  if(Math.abs(n) >= 1e8) return nf2.format(n/1e8)+' 億';
+  if(Math.abs(n) >= 1e4) return nf0.format(Math.round(n/1e4))+' 萬';
+  return nf0.format(Math.round(n));
+}
+
+/* ---------- 配息與稅務 ---------- */
+function annualPerShare(e){
+  if(cfg.basis === 'trailing') return e.trailingAnnualDividend ?? null;
+  const d = e.nextDividend || e.latestDividend;
+  return (d && d.amount != null && e.paymentsPerYear) ? d.amount * e.paymentsPerYear : null;
+}
+function perPayment(e){
+  const a = annualPerShare(e);
+  return (a != null && e.paymentsPerYear) ? a / e.paymentsPerYear : null;
+}
+// 這一檔的股利所得有效稅率（0~1）
+function divTaxRate(e){
+  if(cfg.marginal < 0) return 0;              // 使用者選「不計稅費」
+  if(e.region === '國外') return 0;           // 海外所得，此處以 0 計
+  const merged = cfg.marginal - DIV_CREDIT;
+  return Math.max(0, Math.min(merged, SEP_TAX)) / 100;
+}
+function nhiApplies(e){
+  return cfg.nhi && cfg.marginal >= 0 && e.region !== '國外';
+}
+// 給定股數，算稅後年現金流
+function netAnnual(e, shares){
+  const per = perPayment(e);
+  if(per == null || !e.paymentsPerYear) return 0;
+  const grossPer = shares * per;                                   // 單次給付金額
+  const nhi = (nhiApplies(e) && grossPer >= NHI_MIN) ? NHI_RATE : 0;
+  return grossPer * e.paymentsPerYear * (1 - nhi) * (1 - divTaxRate(e));
+}
+// 反推：要達到 targetAnnual 稅後年現金流，需要幾股
+function sharesNeeded(e, targetAnnual){
+  const per = perPayment(e);
+  if(per == null || per <= 0 || !e.paymentsPerYear) return null;
+  const divR = divTaxRate(e);
+  const base = per * e.paymentsPerYear * (1 - divR);               // 未計健保費的每股年淨額
+  if(base <= 0) return null;
+  let shares = targetAnnual / base;
+  // 單次給付若跨過健保門檻，改用含健保費的公式（shares 只會更大，不會來回震盪）
+  if(nhiApplies(e) && shares * per >= NHI_MIN){
+    shares = targetAnnual / (base * (1 - NHI_RATE));
+  }
+  if(cfg.wholeLot) shares = Math.ceil(shares / SHARES_PER_LOT) * SHARES_PER_LOT;
+  else shares = Math.ceil(shares);
+  return shares;
+}
+
+/* ---------- 入帳月份 ---------- */
+function payoutMonths(e){
+  const n = e.paymentsPerYear || 0;
+  if(!n) return [];
+  if(n >= 12) return [1,2,3,4,5,6,7,8,9,10,11,12];
+  const monthOf = (iso, shift) => {
+    if(!iso) return null;
+    const [y,m] = iso.split('-').map(Number);
+    if(!m) return null;
+    return shift ? (m % 12) + 1 : m;   // 用除息日時往後推一個月當作入帳月
+  };
+  let anchor = null;
+  for(const r of (e.recentDividends || [])){
+    anchor = r.paymentDate ? monthOf(r.paymentDate,false) : monthOf(r.exDate,true);
+    if(anchor) break;
+  }
+  if(!anchor && e.nextDividend) anchor = monthOf(e.nextDividend.exDate, true);
+  if(!anchor && e.latestDividend) anchor = monthOf(e.latestDividend.exDate, true);
+  if(!anchor) anchor = 1;
+  const step = 12 / n;
+  const out = new Set();
+  for(let i=0;i<n;i++) out.add(((anchor - 1 + Math.round(i*step)) % 12) + 1);
+  return [...out].sort((a,b)=>a-b);
+}
+
+/* ---------- 資料列 ---------- */
+function buildRows(){
+  const targetAnnual = cfg.target * 12;
+  ROWS = (DATA.etfs || []).map(e => {
+    const annual = annualPerShare(e);
+    const shares = sharesNeeded(e, targetAnnual);
+    const cost = (shares != null) ? shares * e.price : null;
+    const netMonthly = (shares != null) ? netAnnual(e, shares) / 12 : null;
+    // 兩種基準的落差，用來提醒
+    const tA = e.trailingAnnualDividend;
+    const d = e.nextDividend || e.latestDividend;
+    const lA = (d && d.amount != null && e.paymentsPerYear) ? d.amount * e.paymentsPerYear : null;
+    return {
+      e, annual, shares, cost, netMonthly,
+      lots: shares != null ? shares / SHARES_PER_LOT : null,
+      yieldPct: (annual != null && e.price > 0) ? annual / e.price * 100 : null,
+      price: e.price, aum: e.aumBillionTwd || 0,
+      name: e.code, gapPct: (tA && lA) ? (lA - tA) / tA * 100 : null,
+      months: payoutMonths(e),
+    };
+  });
+}
+
+function filtered(){
+  const r = $('fRegion').value, f = $('fFreq').value;
+  const aum = Number($('fAum').value), onlyComplete = $('fComplete').checked;
+  return ROWS.filter(x =>
+    (!r || x.e.region === r) &&
+    (!f || x.e.frequency === f) &&
+    (x.aum >= aum) &&
+    (!onlyComplete || x.e.trailingComplete) &&
+    x.annual != null && x.annual > 0
+  );
+}
+
+/* ---------- 單檔表格 ---------- */
+function renderTable(){
+  const rows = filtered().sort((a,b)=>{
+    const av = a[sortKey], bv = b[sortKey];
+    if(av == null) return 1;
+    if(bv == null) return -1;
+    return (av - bv) * sortDir;
+  });
+  const tb = $('tbody');
+  if(!rows.length){
+    tb.innerHTML = '';
+    $('singleEmpty').hidden = false;
+    $('singleEmpty').textContent = '目前的篩選條件沒有符合的 ETF，放寬規模門檻或改回「全部」試試。';
+    return;
+  }
+  $('singleEmpty').hidden = true;
+  tb.innerHTML = rows.map(x => {
+    const e = x.e;
+    const tags = [
+      e.region === '國外' ? '<span class="tag fx">海外</span>' : '',
+      (cfg.basis==='trailing' && !e.trailingComplete) ? '<span class="tag est">推估</span>' : '',
+      e.hasIncomeEqualization ? '<span class="tag">平準金</span>' : '',
+    ].join('');
+    return `<tr>
+      <td><span class="code">${e.code}</span>${tags}<span class="nm">${e.name}｜${e.frequency}</span></td>
+      <td class="num">${nf2.format(e.price)}</td>
+      <td class="num">${x.annual!=null?nf2.format(x.annual):'—'}</td>
+      <td class="num">${pct(x.yieldPct)}</td>
+      <td class="big">${x.lots!=null? (cfg.wholeLot? nf0.format(x.lots) : nf2.format(x.lots)) :'—'}</td>
+      <td class="big">${money(x.cost)}</td>
+      <td class="num dim">${money(x.netMonthly)}</td>
+      <td class="num dim">${nf0.format(x.aum)}</td>
+    </tr>`;
+  }).join('');
+  document.querySelectorAll('#tbl th[data-k]').forEach(th => {
+    const on = th.dataset.k === sortKey;
+    th.innerHTML = th.textContent.replace(/[ ▲▼]+$/,'') + (on ? ` <span class="sortmark">${sortDir>0?'▲':'▼'}</span>` : '');
+  });
+}
+
+/* ---------- 基準提示 ---------- */
+function renderBasisNotice(){
+  const rows = ROWS.filter(x => x.gapPct != null && isFinite(x.gapPct));
+  const over = rows.filter(x => x.gapPct > 15).sort((a,b)=>b.gapPct-a.gapPct);
+  const box = $('basisNotice'), txt = $('basisNoticeText');
+  $('basisHint').textContent = cfg.basis === 'trailing'
+    ? '近 12 個月實際配出來的金額合計，較貼近真實。'
+    : '最近一次配息 × 年配次數，常見但容易高估。';
+  if(cfg.basis === 'latest'){
+    box.hidden = false;
+    txt.innerHTML = `你正在使用<strong>最新配息年化</strong>。這假設接下來每一次都配得跟最近一次一樣多，`
+      + (over.length ? `目前有 <strong>${over.length} 檔</strong>的年化值比實際近一年配息高出 15％ 以上（最多的是 ${over[0].e.code}，高 ${nf0.format(over[0].gapPct)}％）。` : '')
+      + `用它回推的本金會偏低，僅適合當作樂觀情境參考。`;
+  } else if(over.length){
+    box.hidden = false;
+    txt.innerHTML = `目前有 <strong>${over.length} 檔</strong>的「最新配息年化」比近一年實際配息高出 15％ 以上`
+      + `（最多的是 <strong>${over[0].e.code} ${over[0].e.name}</strong>，高 ${nf0.format(over[0].gapPct)}％）。`
+      + `本頁預設使用實際配息，所以算出來的本金需求會比其他網站高——那是比較保守、也比較接近現實的數字。`;
+  } else {
+    box.hidden = true;
+  }
+}
+
+/* ---------- 組合：勾選清單 ---------- */
+function renderPickGrid(){
+  const rows = filtered().slice().sort((a,b)=>b.aum-a.aum);
+  $('pickgrid').innerHTML = rows.map(x => {
+    const on = picked.includes(x.e.code);
+    return `<label class="pick">
+      <input type="checkbox" data-code="${x.e.code}" ${on?'checked':''}>
+      <span class="swatch" style="background:${on?colorOf(x.e.code):'var(--axis)'}"></span>
+      <span class="pn">${x.e.code} ${x.e.name}</span>
+      <span class="py">${pct(x.yieldPct)}</span>
+    </label>`;
+  }).join('');
+}
+
+/* ---------- 組合：計算 ---------- */
+function comboMonthly(){
+  const months = Array.from({length:13}, () => 0);
+  const bySeries = picked.map(code => {
+    const x = ROWS.find(r => r.e.code === code);
+    const arr = Array.from({length:13}, () => 0);
+    if(x){
+      const shares = (lots.get(code) || 0) * SHARES_PER_LOT;
+      if(shares > 0 && x.months.length){
+        const net = netAnnual(x.e, shares) / x.months.length;   // 平均分到各入帳月
+        x.months.forEach(m => { arr[m] += net; months[m] += net; });
+      }
+    }
+    return { code, x, arr };
+  });
+  return { months, bySeries };
+}
+function coveredMonths(){
+  const s = new Set();
+  picked.forEach(code => {
+    const x = ROWS.find(r => r.e.code === code);
+    if(x) x.months.forEach(m => s.add(m));
+  });
+  return s;
+}
+
+function autoAllocate(){
+  if(picked.length < 1) return;
+  picked.forEach(c => lots.set(c, 0));
+  const cover = coveredMonths();
+  if(!cover.size) return;
+  const target = cfg.target;
+  for(let guard=0; guard<25000; guard++){
+    const { months } = comboMonthly();
+    let low = null;
+    cover.forEach(m => { if(low === null || months[m] < months[low]) low = m; });
+    if(low === null || months[low] >= target) break;
+    // 在該月有配息、且每元本金對該月貢獻最高者。
+    // bestScore 從 -Infinity 起算不是筆誤：單次配息剛跨過二代健保 20,000 元門檻的那一張，
+    // 會讓整筆給付開始被扣 2.11%，該張的邊際貢獻是「負的」（多買一張反而拿更少）。
+    // 若只收正分數，配置會卡死在門檻前一張。這裡允許選最不差的一張穿過門檻，之後就恢復正常。
+    let best = null, bestScore = -Infinity;
+    for(const code of picked){
+      const x = ROWS.find(r => r.e.code === code);
+      if(!x || !x.months.includes(low)) continue;
+      const cur = lots.get(code) || 0;
+      const before = netAnnual(x.e, cur * SHARES_PER_LOT) / (x.months.length || 1);
+      const after  = netAnnual(x.e, (cur+1) * SHARES_PER_LOT) / (x.months.length || 1);
+      const score = (after - before) / (x.e.price * SHARES_PER_LOT);
+      if(score > bestScore){ bestScore = score; best = code; }
+    }
+    if(!best) break;
+    lots.set(best, (lots.get(best) || 0) + 1);
+  }
+  renderCombo();
+}
+
+function renderCombo(){
+  const has = picked.length > 0;
+  $('comboEmpty').hidden = has;
+  $('comboBody').hidden = !has;
+  if(!has) return;
+
+  const { months, bySeries } = comboMonthly();
+  const cover = coveredMonths();
+  const target = cfg.target;
+  const vals = [];
+  for(let m=1;m<=12;m++) vals.push(months[m]);
+  const totalCost = picked.reduce((s,code)=>{
+    const x = ROWS.find(r=>r.e.code===code);
+    return s + (x ? (lots.get(code)||0) * SHARES_PER_LOT * x.e.price : 0);
+  },0);
+  const annualNet = vals.reduce((a,b)=>a+b,0);
+  const minM = vals.reduce((lo,v,i)=> v < vals[lo] ? i : lo, 0);
+  const shortMonths = [];
+  for(let m=1;m<=12;m++) if(months[m] < target - 0.5) shortMonths.push(m);
+
+  /* KPI */
+  $('kpis').innerHTML = `
+    <div class="kpi"><div class="k">所需總本金</div><div class="v">${wan(totalCost)}<small>元</small></div></div>
+    <div class="kpi"><div class="k">稅後年現金流</div><div class="v">${wan(annualNet)}<small>元</small></div></div>
+    <div class="kpi"><div class="k">平均每月</div><div class="v">${money(annualNet/12)}<small>元</small></div></div>
+    <div class="kpi ${months[minM+1] < target-0.5 ? 'alert':''}"><div class="k">最少的月份（${minM+1} 月）</div><div class="v">${money(vals[minM])}<small>元</small></div></div>
+    <div class="kpi ${shortMonths.length?'alert':''}"><div class="k">未達標月份</div><div class="v">${shortMonths.length ? shortMonths.join('、')+' 月' : '無'}</div></div>
+  `;
+
+  /* 圖 */
+  const max = Math.max(target, ...vals) * 1.12 || 1;
+  const body = $('chartbody');
+  const gridN = 4;
+  let html = '';
+  for(let g=1; g<=gridN; g++){
+    const v = max * g / gridN;
+    html += `<div class="gridline" style="bottom:${(v/max*100).toFixed(2)}%"><span>${nf0.format(Math.round(v))}</span></div>`;
+  }
+  html += `<div class="targetline" style="bottom:${(target/max*100).toFixed(2)}%"><span>目標 ${money(target)}</span></div>`;
+  for(let m=1;m<=12;m++){
+    const stack = bySeries
+      .filter(s=>s.arr[m]>0)
+      .map(s=>`<div class="seg-bar" style="height:${(s.arr[m]/months[m]*100).toFixed(3)}%;background:${colorOf(s.code)}"></div>`)
+      .join('');
+    const cls = ['col', months[m] < target-0.5 ? 'short':'', !cover.has(m) ? 'empty':''].filter(Boolean).join(' ');
+    html += `<div class="${cls}" data-m="${m}"><div class="stack" style="height:${(months[m]/max*100).toFixed(2)}%">${stack}</div></div>`;
+  }
+  body.innerHTML = html;
+  $('xaxis').innerHTML = Array.from({length:12},(_,i)=>
+    `<div class="${months[i+1] < target-0.5 ? 'bad':''}">${i+1}</div>`).join('');
+  $('legend').innerHTML = bySeries.map(s=>
+    `<span class="li"><i style="background:${colorOf(s.code)}"></i>${s.code} ${s.x?s.x.e.name:''}</span>`).join('')
+    + (shortMonths.length ? `<span class="li" style="color:var(--crit)"><i style="background:repeating-linear-gradient(45deg,var(--crit),var(--crit) 2px,transparent 2px,transparent 4px)"></i>未達目標</span>` : '');
+
+  /* 逐檔張數 */
+  $('lotlist').innerHTML = picked.map(code=>{
+    const x = ROWS.find(r=>r.e.code===code);
+    if(!x) return '';
+    const n = lots.get(code)||0;
+    return `<div class="lotrow">
+      <span class="sw" style="background:${colorOf(code)}"></span>
+      <span class="nmz">${code} ${x.e.name}</span>
+      <input type="number" min="0" step="1" value="${n}" data-lot="${code}" aria-label="${code} 張數">
+      <span class="cost">${money(n*SHARES_PER_LOT*x.e.price)}</span>
+      <span class="mth">入帳月 ${x.months.join('、')}</span>
+    </div>`;
+  }).join('');
+
+  /* 表格檢視 */
+  $('monthTbody').innerHTML = Array.from({length:12},(_,i)=>{
+    const v = months[i+1], d = v - target;
+    return `<tr><td>${i+1} 月</td><td class="num">${money(v)}</td><td class="num" style="color:${d<-0.5?'var(--crit)':'var(--ink-2)'}">${d>=0?'+':''}${money(d)}</td></tr>`;
+  }).join('');
+
+  bindChartHover(bySeries, months, target);
+}
+
+/* ---------- 圖表 hover ---------- */
+function bindChartHover(bySeries, months, target){
+  const tip = $('tip');
+  $('chartbody').querySelectorAll('.col').forEach(col => {
+    const m = Number(col.dataset.m);
+    const show = (ev) => {
+      const rows = bySeries.filter(s=>s.arr[m]>0)
+        .map(s=>`<div class="r"><span><i style="background:${colorOf(s.code)}"></i>${s.code}</span><span>${money(s.arr[m])}</span></div>`)
+        .join('') || '<div class="r"><span>這個月沒有任何選定的 ETF 配息</span></div>';
+      const d = months[m] - target;
+      tip.innerHTML = `<b>${m} 月入帳</b>${rows}<div class="r tot"><span>合計</span><span>${money(months[m])}</span></div>`
+        + `<div class="r" style="color:${d<-0.5?'var(--crit)':'var(--ink-muted)'}"><span>與目標</span><span>${d>=0?'+':''}${money(d)}</span></div>`;
+      tip.classList.add('on');
+      const w = tip.offsetWidth, h = tip.offsetHeight;
+      let x = ev.clientX + 14, y = ev.clientY - h - 10;
+      if(x + w > innerWidth - 8) x = ev.clientX - w - 14;
+      if(y < 8) y = ev.clientY + 16;
+      tip.style.left = x+'px'; tip.style.top = y+'px';
+    };
+    col.addEventListener('mouseenter', show);
+    col.addEventListener('mousemove', show);
+    col.addEventListener('mouseleave', ()=> tip.classList.remove('on'));
+  });
+}
+
+/* ---------- 重繪 ---------- */
+function refresh(){
+  buildRows();
+  renderBasisNotice();
+  renderTable();
+  renderPickGrid();
+  renderCombo();
+}
+
+/* ---------- 事件 ---------- */
+function syncChips(){
+  $('targetChips').querySelectorAll('.chip').forEach(c =>
+    c.setAttribute('aria-pressed', String(Number(c.dataset.v) === cfg.target)));
+}
+$('target').addEventListener('input', e => {
+  const v = Number(e.target.value);
+  if(!isFinite(v) || v <= 0) return;
+  cfg.target = v; syncChips(); refresh();
+});
+$('targetChips').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if(!b) return;
+  cfg.target = Number(b.dataset.v); $('target').value = cfg.target; syncChips(); refresh();
+});
+$('basisSeg').addEventListener('click', e => {
+  const b = e.target.closest('button'); if(!b) return;
+  cfg.basis = b.dataset.v;
+  $('basisSeg').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  refresh();
+});
+$('marginal').addEventListener('change', e => { cfg.marginal = Number(e.target.value); refresh(); });
+$('nhi').addEventListener('change', e => { cfg.nhi = e.target.checked; refresh(); });
+$('wholeLot').addEventListener('change', e => { cfg.wholeLot = e.target.checked; refresh(); });
+['fRegion','fFreq','fAum','fComplete'].forEach(id => $(id).addEventListener('change', () => { renderTable(); renderPickGrid(); }));
+
+document.querySelectorAll('#tbl th[data-k]').forEach(th => {
+  if(th.classList.contains('nosort')) return;
+  th.addEventListener('click', () => {
+    const k = th.dataset.k;
+    if(k === sortKey) sortDir = -sortDir; else { sortKey = k; sortDir = 1; }
+    renderTable();
+  });
+});
+
+document.querySelector('.tabs').addEventListener('click', e => {
+  const b = e.target.closest('[role=tab]'); if(!b) return;
+  document.querySelectorAll('[role=tab]').forEach(t => {
+    const on = t === b;
+    t.setAttribute('aria-selected', String(on));
+    $(t.getAttribute('aria-controls')).hidden = !on;
+  });
+});
+
+$('pickgrid').addEventListener('change', e => {
+  const cb = e.target.closest('input[type=checkbox]'); if(!cb) return;
+  const code = cb.dataset.code;
+  const i = picked.indexOf(code);
+  if(cb.checked){
+    if(i < 0){
+      if(picked.length >= MAX_PICK){ cb.checked = false; return; }
+      picked.push(code); lots.set(code, 0); claimSlot(code);
+    }
+  } else if(i >= 0){
+    picked.splice(i,1); lots.delete(code); slotOf.delete(code);
+  }
+  renderPickGrid(); renderCombo();
+});
+$('lotlist').addEventListener('input', e => {
+  const inp = e.target.closest('input[data-lot]'); if(!inp) return;
+  const v = Math.max(0, Math.floor(Number(inp.value) || 0));
+  lots.set(inp.dataset.lot, v);
+  renderCombo();
+  const again = $('lotlist').querySelector(`input[data-lot="${inp.dataset.lot}"]`);
+  if(again){ again.focus(); again.setSelectionRange(again.value.length, again.value.length); }
+});
+$('autoBtn').addEventListener('click', autoAllocate);
+$('clearBtn').addEventListener('click', () => { picked.forEach(c => lots.set(c,0)); renderCombo(); });
+
+$('themebtn').addEventListener('click', () => {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const dark = cur ? cur === 'dark'
+    : matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.setAttribute('data-theme', dark ? 'light' : 'dark');
+  $('themebtn').textContent = dark ? '切換深色' : '切換淺色';
+  renderCombo();
+});
+
+/* ---------- 載入 ---------- */
+function boot(payload){
+  DATA = payload;
+  const d = new Date(payload.asOf);
+  const closeDate = (payload.etfs || []).map(e=>e.closeDate).filter(Boolean).sort().pop();
+  $('asof').textContent = `收盤價日期 ${closeDate || '—'}　·　資料同步於 ${d.toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false})}　·　共 ${(payload.etfs||[]).length} 檔`;
+  const freqs = [...new Set((payload.etfs||[]).map(e=>e.frequency).filter(Boolean))];
+  $('fFreq').innerHTML = '<option value="">全部</option>' + freqs.map(f=>`<option value="${f}">${f}</option>`).join('');
+  syncChips();
+  refresh();
+}
+
+fetch('data.json', { cache:'no-cache' })
+  .then(r => { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+  .then(payload => {
+    if(!payload || !Array.isArray(payload.etfs) || !payload.etfs.length) throw new Error('empty');
+    boot(payload);
+  })
+  .catch(err => {
+    $('asof').textContent = '尚未取得資料';
+    $('singleEmpty').hidden = false;
+    $('singleEmpty').innerHTML = `讀不到 <code>data.json</code>（${err.message}）。<br>`
+      + `若這是剛建立的網站，請到 GitHub 的 <strong>Actions</strong> 分頁，`
+      + `手動執行一次「更新 ETF 配息資料（月領試算用）」，等它跑完再重新整理這頁。`;
+    $('basisNotice').hidden = true;
+  });
+
+})();
+</script>
+</body>
+</html>
