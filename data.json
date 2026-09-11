@@ -1,5 +1,5 @@
 {
- "asOf": "2026-09-10T11:34:35.278Z",
+ "asOf": "2026-09-11T01:32:36.484Z",
  "marketStatus": "收盤",
  "scope": "每次同步依證交所「高股息」與「高息低波動」主題分類重建，收錄該分類下的全部臺灣掛牌 ETF；再與證交所「國內成分證券 ETF」及「國內主動式 ETF」官方清單比對，標示每一檔的投資地區。",
  "etfs": [
@@ -45,7 +45,7 @@
    "trailing12mCount": 2,
    "trailingBasis": "配息紀錄不足一年，以近 2 次平均推估",
    "trailingComplete": false,
-   "aumBillionTwd": 287,
+   "aumBillionTwd": 286,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00400A"
@@ -73,7 +73,7 @@
    "trailing12mCount": 0,
    "trailingBasis": "尚無配息紀錄",
    "trailingComplete": false,
-   "aumBillionTwd": 276,
+   "aumBillionTwd": 274,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方基金名稱與公開資料",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00405A"
@@ -125,7 +125,7 @@
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
    "trailingComplete": true,
-   "aumBillionTwd": 7869,
+   "aumBillionTwd": 7866,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/0056"
@@ -171,9 +171,9 @@
      "paymentDate": "2025-02-18"
     }
    ],
-   "trailingAnnualDividend": 2.5,
-   "trailingYield": 6.160670280926565,
-   "trailing12mSum": 2.5,
+   "trailingAnnualDividend": 2.3,
+   "trailingYield": 5.667816658452439,
+   "trailing12mSum": 2.3,
    "trailing12mCount": 2,
    "trailingBasis": "近 12 個月實際配息",
    "trailingComplete": true,
@@ -274,7 +274,7 @@
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
    "trailingComplete": true,
-   "aumBillionTwd": 1079,
+   "aumBillionTwd": 1078,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00713"
@@ -326,7 +326,7 @@
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
    "trailingComplete": true,
-   "aumBillionTwd": 18,
+   "aumBillionTwd": 17,
    "hasIncomeEqualization": false,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00717"
@@ -501,10 +501,10 @@
    ],
    "trailingAnnualDividend": 0.84,
    "trailingYield": 5.57398805573988,
-   "trailing12mSum": 0.63,
-   "trailing12mCount": 3,
-   "trailingBasis": "配息紀錄不足一年，以近 3 次平均推估",
-   "trailingComplete": false,
+   "trailing12mSum": 0.84,
+   "trailing12mCount": 4,
+   "trailingBasis": "近 12 個月實際配息",
+   "trailingComplete": true,
    "aumBillionTwd": 2,
    "hasIncomeEqualization": false,
    "equalizationBasis": "官方收益分配條款",
@@ -551,13 +551,13 @@
      "paymentDate": "2025-12-12"
     }
    ],
-   "trailingAnnualDividend": 1.9733,
-   "trailingYield": 5.778330893118595,
-   "trailing12mSum": 1.48,
-   "trailing12mCount": 3,
-   "trailingBasis": "配息紀錄不足一年，以近 3 次平均推估",
-   "trailingComplete": false,
-   "aumBillionTwd": 6452,
+   "trailingAnnualDividend": 2.49,
+   "trailingYield": 7.291361639824305,
+   "trailing12mSum": 2.49,
+   "trailing12mCount": 4,
+   "trailingBasis": "近 12 個月實際配息",
+   "trailingComplete": true,
+   "aumBillionTwd": 6450,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00878"
@@ -599,7 +599,7 @@
    "trailing12mCount": 2,
    "trailingBasis": "近 12 個月實際配息",
    "trailingComplete": true,
-   "aumBillionTwd": 296,
+   "aumBillionTwd": 295,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00882"
@@ -674,7 +674,7 @@
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
    "trailingComplete": false,
-   "aumBillionTwd": 301,
+   "aumBillionTwd": 299,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00900"
@@ -781,7 +781,7 @@
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
    "trailingComplete": true,
-   "aumBillionTwd": 168,
+   "aumBillionTwd": 167,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00915"
@@ -836,7 +836,7 @@
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
    "trailingComplete": true,
-   "aumBillionTwd": 1387,
+   "aumBillionTwd": 1402,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00918"
@@ -891,7 +891,7 @@
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
    "trailingComplete": true,
-   "aumBillionTwd": 6047,
+   "aumBillionTwd": 6053,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00919"
@@ -966,7 +966,7 @@
    "trailing12mCount": 7,
    "trailingBasis": "配息紀錄不足一年，以近 7 次平均推估",
    "trailingComplete": false,
-   "aumBillionTwd": 1501,
+   "aumBillionTwd": 1495,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00929"
@@ -1142,13 +1142,13 @@
      "paymentDate": "2026-02-23"
     }
    ],
-   "trailingAnnualDividend": 2.3229,
-   "trailingYield": 7.663807324315409,
-   "trailing12mSum": 1.355,
-   "trailing12mCount": 7,
-   "trailingBasis": "配息紀錄不足一年，以近 7 次平均推估",
+   "trailingAnnualDividend": 2.4825,
+   "trailingYield": 8.190366215770373,
+   "trailing12mSum": 1.655,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
    "trailingComplete": false,
-   "aumBillionTwd": 130,
+   "aumBillionTwd": 129,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00934"
@@ -1220,7 +1220,7 @@
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
    "trailingComplete": false,
-   "aumBillionTwd": 42,
+   "aumBillionTwd": 41,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00936"
@@ -1292,7 +1292,7 @@
    "trailing12mCount": 7,
    "trailingBasis": "配息紀錄不足一年，以近 7 次平均推估",
    "trailingComplete": false,
-   "aumBillionTwd": 278,
+   "aumBillionTwd": 277,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00939"
@@ -1369,7 +1369,7 @@
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
    "trailingComplete": false,
-   "aumBillionTwd": 673,
+   "aumBillionTwd": 668,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00940"
@@ -1449,7 +1449,7 @@
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
    "trailingComplete": false,
-   "aumBillionTwd": 9,
+   "aumBillionTwd": 8,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00943"
@@ -1518,11 +1518,11 @@
      "paymentDate": "2026-02-12"
     }
    ],
-   "trailingAnnualDividend": 0.7423,
-   "trailingYield": 3.4589934762348555,
-   "trailing12mSum": 0.433,
-   "trailing12mCount": 7,
-   "trailingBasis": "配息紀錄不足一年，以近 7 次平均推估",
+   "trailingAnnualDividend": 0.813,
+   "trailingYield": 3.7884436160298227,
+   "trailing12mSum": 0.542,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
    "trailingComplete": false,
    "aumBillionTwd": 11,
    "hasIncomeEqualization": true,
@@ -1601,7 +1601,7 @@
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
    "trailingComplete": false,
-   "aumBillionTwd": 68,
+   "aumBillionTwd": 67,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00946"
@@ -1725,7 +1725,7 @@
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
    "trailingComplete": false,
-   "aumBillionTwd": 122,
+   "aumBillionTwd": 123,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00961"
@@ -1797,7 +1797,7 @@
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
    "trailingComplete": false,
-   "aumBillionTwd": 13,
+   "aumBillionTwd": 14,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00962"
@@ -1866,11 +1866,11 @@
      "paymentDate": "2026-02-23"
     }
    ],
-   "trailingAnnualDividend": 0.7731,
-   "trailingYield": 5.928680981595093,
-   "trailing12mSum": 0.451,
-   "trailing12mCount": 7,
-   "trailingBasis": "配息紀錄不足一年，以近 7 次平均推估",
+   "trailingAnnualDividend": 0.8265,
+   "trailingYield": 6.338190184049081,
+   "trailing12mSum": 0.551,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
    "trailingComplete": false,
    "aumBillionTwd": 15,
    "hasIncomeEqualization": true,
@@ -1941,11 +1941,11 @@
      "paymentDate": "2026-02-23"
     }
    ],
-   "trailingAnnualDividend": 1.1931,
-   "trailingYield": 7.980602006688963,
-   "trailing12mSum": 0.696,
-   "trailing12mCount": 7,
-   "trailingBasis": "配息紀錄不足一年，以近 7 次平均推估",
+   "trailingAnnualDividend": 1.224,
+   "trailingYield": 8.187290969899665,
+   "trailing12mSum": 0.816,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
    "trailingComplete": false,
    "aumBillionTwd": 10,
    "hasIncomeEqualization": true,
@@ -2085,7 +2085,7 @@
    "trailing12mCount": 0,
    "trailingBasis": "尚無配息紀錄",
    "trailingComplete": false,
-   "aumBillionTwd": 116,
+   "aumBillionTwd": 115,
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00999A"
