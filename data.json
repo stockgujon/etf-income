@@ -1,8 +1,138 @@
 {
- "asOf": "2026-09-25T01:30:53.458Z",
+ "asOf": "2026-09-25T06:41:09.133Z",
  "marketStatus": "收盤",
  "scope": "每次同步依證交所「高股息」與「高息低波動」主題分類重建，收錄該分類下的全部臺灣掛牌 ETF；再與證交所「國內成分證券 ETF」及「國內主動式 ETF」官方清單比對，標示每一檔的投資地區。",
  "etfs": [
+  {
+   "code": "00400A",
+   "name": "主動國泰動能高息",
+   "issuer": "國泰證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 15.66,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.12,
+    "exDate": "2026-09-07"
+   },
+   "nextDividend": {
+    "amount": 0.12,
+    "exDate": "2026-10-08"
+   },
+   "nextDividendSource": "公告預估",
+   "frequency": "月配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 12,
+   "annualizedYield": 9.195402298850574,
+   "yieldBasis": "下次配息（公告預估）",
+   "recentDividends": [
+    {
+     "amount": 0.12,
+     "exDate": "2026-09-07",
+     "paymentDate": "2026-10-05"
+    },
+    {
+     "amount": 0.12,
+     "exDate": "2026-08-05",
+     "paymentDate": "2026-08-31"
+    },
+    {
+     "amount": 0.12,
+     "exDate": "2026-07-09",
+     "paymentDate": "2026-07-31"
+    }
+   ],
+   "trailingAnnualDividend": 1.44,
+   "trailingYield": 9.195402298850574,
+   "trailing12mSum": 0.24,
+   "trailing12mCount": 2,
+   "trailingBasis": "配息紀錄不足一年，以近 2 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 292,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00400A"
+  },
+  {
+   "code": "00405A",
+   "name": "主動富邦台灣龍耀",
+   "issuer": "富邦證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 9.39,
+   "closeDate": "2026-09-24",
+   "latestDividend": null,
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "季配",
+   "frequencyBasis": "證交所新上市商品簡介",
+   "paymentsPerYear": 4,
+   "annualizedYield": null,
+   "yieldBasis": null,
+   "recentDividends": [],
+   "trailingAnnualDividend": null,
+   "trailingYield": null,
+   "trailing12mSum": null,
+   "trailing12mCount": 0,
+   "trailingBasis": "尚無配息紀錄",
+   "trailingComplete": false,
+   "aumBillionTwd": 264,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方基金名稱與公開資料",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00405A"
+  },
+  {
+   "code": "0056",
+   "name": "元大高股息",
+   "issuer": "元大證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 56.65,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 1.35,
+    "exDate": "2026-07-21"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "季配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 4,
+   "annualizedYield": 9.532215357458076,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 1.35,
+     "exDate": "2026-07-21",
+     "paymentDate": "2026-08-10"
+    },
+    {
+     "amount": 1,
+     "exDate": "2026-04-23",
+     "paymentDate": "2026-05-14"
+    },
+    {
+     "amount": 0.866,
+     "exDate": "2026-01-22",
+     "paymentDate": "2026-02-11"
+    },
+    {
+     "amount": 0.866,
+     "exDate": null,
+     "paymentDate": "2025-11-14"
+    }
+   ],
+   "trailingAnnualDividend": 4.082,
+   "trailingYield": 7.205648720211827,
+   "trailing12mSum": 4.082,
+   "trailing12mCount": 4,
+   "trailingBasis": "近 12 個月實際配息",
+   "trailingComplete": true,
+   "aumBillionTwd": 7978,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/0056"
+  },
   {
    "code": "00701",
    "name": "國泰股利精選30",
@@ -155,6 +285,58 @@
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00713"
   },
   {
+   "code": "00717",
+   "name": "富邦美國特別股",
+   "issuer": "富邦證券投資信託股份有限公司",
+   "region": "國外",
+   "regionDetail": "美國",
+   "price": 14.54,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.141,
+    "exDate": "2026-07-16"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "季配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 4,
+   "annualizedYield": 3.8789546079779913,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.141,
+     "exDate": "2026-07-16",
+     "paymentDate": "2026-08-10"
+    },
+    {
+     "amount": 0.141,
+     "exDate": "2026-04-20",
+     "paymentDate": "2026-05-15"
+    },
+    {
+     "amount": 0.141,
+     "exDate": "2026-01-20",
+     "paymentDate": "2026-02-12"
+    },
+    {
+     "amount": 0.141,
+     "exDate": null,
+     "paymentDate": "2025-11-13"
+    }
+   ],
+   "trailingAnnualDividend": 0.564,
+   "trailingYield": 3.8789546079779913,
+   "trailing12mSum": 0.564,
+   "trailing12mCount": 4,
+   "trailingBasis": "近 12 個月實際配息",
+   "trailingComplete": true,
+   "aumBillionTwd": 17,
+   "hasIncomeEqualization": false,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00717"
+  },
+  {
    "code": "00730",
    "name": "富邦臺灣優質高息",
    "issuer": "富邦證券投資信託股份有限公司",
@@ -284,6 +466,281 @@
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00731"
   },
   {
+   "code": "00771",
+   "name": "元大US高息特別股",
+   "issuer": "元大證券投資信託股份有限公司",
+   "region": "國外",
+   "regionDetail": "美國",
+   "price": 15.06,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.21,
+    "exDate": "2026-08-21"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "季配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 4,
+   "annualizedYield": 5.577689243027888,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.21,
+     "exDate": "2026-08-21",
+     "paymentDate": "2026-09-11"
+    },
+    {
+     "amount": 0.21,
+     "exDate": "2026-05-22",
+     "paymentDate": "2026-06-12"
+    },
+    {
+     "amount": 0.21,
+     "exDate": "2026-02-26",
+     "paymentDate": "2026-03-20"
+    },
+    {
+     "amount": 0.21,
+     "exDate": null,
+     "paymentDate": "2025-12-12"
+    }
+   ],
+   "trailingAnnualDividend": 0.84,
+   "trailingYield": 5.577689243027888,
+   "trailing12mSum": 0.84,
+   "trailing12mCount": 4,
+   "trailingBasis": "近 12 個月實際配息",
+   "trailingComplete": true,
+   "aumBillionTwd": 2,
+   "hasIncomeEqualization": false,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00771"
+  },
+  {
+   "code": "00878",
+   "name": "國泰永續高股息",
+   "issuer": "國泰證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 34.88,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 1.01,
+    "exDate": "2026-08-18"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "季配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 4,
+   "annualizedYield": 11.582568807339449,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 1.01,
+     "exDate": "2026-08-18",
+     "paymentDate": "2026-09-11"
+    },
+    {
+     "amount": 0.66,
+     "exDate": "2026-05-19",
+     "paymentDate": "2026-06-12"
+    },
+    {
+     "amount": 0.42,
+     "exDate": "2026-02-26",
+     "paymentDate": "2026-03-23"
+    },
+    {
+     "amount": 0.4,
+     "exDate": null,
+     "paymentDate": "2025-12-12"
+    }
+   ],
+   "trailingAnnualDividend": 2.49,
+   "trailingYield": 7.138761467889908,
+   "trailing12mSum": 2.49,
+   "trailing12mCount": 4,
+   "trailingBasis": "近 12 個月實際配息",
+   "trailingComplete": true,
+   "aumBillionTwd": 6556,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00878"
+  },
+  {
+   "code": "00882",
+   "name": "中信中國高股息",
+   "issuer": "中國信託證券投資信託股份有限公司",
+   "region": "國外",
+   "regionDetail": "中國",
+   "price": 14.78,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.55,
+    "exDate": "2026-07-16"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "半年配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 2,
+   "annualizedYield": 7.442489851150204,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.55,
+     "exDate": "2026-07-16",
+     "paymentDate": "2026-08-11"
+    },
+    {
+     "amount": 0.45,
+     "exDate": "2026-01-19",
+     "paymentDate": "2026-02-23"
+    }
+   ],
+   "trailingAnnualDividend": 1,
+   "trailingYield": 6.7658998646820026,
+   "trailing12mSum": 1,
+   "trailing12mCount": 2,
+   "trailingBasis": "近 12 個月實際配息",
+   "trailingComplete": true,
+   "aumBillionTwd": 291,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00882"
+  },
+  {
+   "code": "00900",
+   "name": "富邦特選高股息30",
+   "issuer": "富邦證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 19.53,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.075,
+    "exDate": "2026-09-16"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "月配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 12,
+   "annualizedYield": 4.608294930875576,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.075,
+     "exDate": "2026-09-16",
+     "paymentDate": "2026-10-14"
+    },
+    {
+     "amount": 0.075,
+     "exDate": "2026-08-18",
+     "paymentDate": "2026-09-10"
+    },
+    {
+     "amount": 0.075,
+     "exDate": "2026-07-16",
+     "paymentDate": "2026-08-10"
+    },
+    {
+     "amount": 0.075,
+     "exDate": "2026-06-16",
+     "paymentDate": "2026-07-09"
+    },
+    {
+     "amount": 0.075,
+     "exDate": "2026-05-19",
+     "paymentDate": "2026-06-11"
+    },
+    {
+     "amount": 0.075,
+     "exDate": "2026-04-20",
+     "paymentDate": "2026-05-15"
+    },
+    {
+     "amount": 0.075,
+     "exDate": "2026-03-17",
+     "paymentDate": "2026-04-13"
+    },
+    {
+     "amount": 0.075,
+     "exDate": "2026-02-25",
+     "paymentDate": "2026-03-20"
+    },
+    {
+     "amount": 0.075,
+     "exDate": "2026-01-20",
+     "paymentDate": "2026-02-12"
+    }
+   ],
+   "trailingAnnualDividend": 0.9,
+   "trailingYield": 4.6082949308755765,
+   "trailing12mSum": 0.6,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 296,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00900"
+  },
+  {
+   "code": "00907",
+   "name": "永豐優息存股",
+   "issuer": "永豐證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 17.75,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.24,
+    "exDate": "2026-08-25"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "雙月配",
+   "frequencyBasis": "官方收益分配條款",
+   "paymentsPerYear": 6,
+   "annualizedYield": 8.112676056338028,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.24,
+     "exDate": "2026-08-25",
+     "paymentDate": "2026-09-18"
+    },
+    {
+     "amount": 0.205,
+     "exDate": "2026-06-24",
+     "paymentDate": "2026-07-20"
+    },
+    {
+     "amount": 0.2,
+     "exDate": "2026-04-23",
+     "paymentDate": "2026-05-20"
+    },
+    {
+     "amount": 0.16,
+     "exDate": "2026-02-25",
+     "paymentDate": "2026-03-20"
+    }
+   ],
+   "trailingAnnualDividend": 1.2075,
+   "trailingYield": 6.802816901408451,
+   "trailing12mSum": 0.805,
+   "trailing12mCount": 4,
+   "trailingBasis": "配息紀錄不足一年，以近 4 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 27,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00907"
+  },
+  {
    "code": "00915",
    "name": "凱基優選高股息30",
    "issuer": "凱基證券投資信託股份有限公司",
@@ -339,6 +796,1340 @@
    "hasIncomeEqualization": true,
    "equalizationBasis": "官方收益分配條款",
    "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00915"
+  },
+  {
+   "code": "00918",
+   "name": "大華優利高填息30",
+   "issuer": "大華銀證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 33.98,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 1.75,
+    "exDate": "2026-09-18"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "季配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 4,
+   "annualizedYield": 20.600353148911125,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 1.75,
+     "exDate": "2026-09-18",
+     "paymentDate": "2026-10-15"
+    },
+    {
+     "amount": 1.26,
+     "exDate": "2026-06-18",
+     "paymentDate": "2026-07-13"
+    },
+    {
+     "amount": 0.62,
+     "exDate": "2026-03-19",
+     "paymentDate": "2026-04-14"
+    },
+    {
+     "amount": 0.565,
+     "exDate": null,
+     "paymentDate": "2026-01-13"
+    }
+   ],
+   "trailingAnnualDividend": 3.26,
+   "trailingYield": 9.593878752207182,
+   "trailing12mSum": 2.445,
+   "trailing12mCount": 3,
+   "trailingBasis": "配息紀錄不足一年，以近 3 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 1591,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00918"
+  },
+  {
+   "code": "00919",
+   "name": "群益台灣精選高息",
+   "issuer": "群益證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 31.83,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 1.1,
+    "exDate": "2026-09-16"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "季配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 4,
+   "annualizedYield": 13.823437009110902,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 1.1,
+     "exDate": "2026-09-16",
+     "paymentDate": "2026-10-15"
+    },
+    {
+     "amount": 1,
+     "exDate": "2026-06-16",
+     "paymentDate": "2026-07-13"
+    },
+    {
+     "amount": 0.78,
+     "exDate": "2026-03-17",
+     "paymentDate": "2026-04-14"
+    },
+    {
+     "amount": 0.54,
+     "exDate": null,
+     "paymentDate": "2026-01-13"
+    }
+   ],
+   "trailingAnnualDividend": 3.0933,
+   "trailingYield": 9.7181903864279,
+   "trailing12mSum": 2.32,
+   "trailing12mCount": 3,
+   "trailingBasis": "配息紀錄不足一年，以近 3 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 6075,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00919"
+  },
+  {
+   "code": "00929",
+   "name": "復華台灣科技優息",
+   "issuer": "復華證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 29.18,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.38,
+    "exDate": "2026-09-17"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "月配",
+   "frequencyBasis": "官方收益分配條款",
+   "paymentsPerYear": 12,
+   "annualizedYield": 15.627141877998632,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.38,
+     "exDate": "2026-09-17",
+     "paymentDate": "2026-10-16"
+    },
+    {
+     "amount": 0.38,
+     "exDate": "2026-08-19",
+     "paymentDate": "2026-09-14"
+    },
+    {
+     "amount": 0.38,
+     "exDate": "2026-07-21",
+     "paymentDate": "2026-08-14"
+    },
+    {
+     "amount": 0.26,
+     "exDate": "2026-06-17",
+     "paymentDate": "2026-07-13"
+    },
+    {
+     "amount": 0.13,
+     "exDate": "2026-05-20",
+     "paymentDate": "2026-06-15"
+    },
+    {
+     "amount": 0.13,
+     "exDate": "2026-04-21",
+     "paymentDate": "2026-05-18"
+    },
+    {
+     "amount": 0.11,
+     "exDate": "2026-03-18",
+     "paymentDate": "2026-04-15"
+    },
+    {
+     "amount": 0.1,
+     "exDate": "2026-03-03",
+     "paymentDate": "2026-03-27"
+    },
+    {
+     "amount": 0.1,
+     "exDate": "2026-01-20",
+     "paymentDate": "2026-02-13"
+    }
+   ],
+   "trailingAnnualDividend": 2.385,
+   "trailingYield": 8.17340644276902,
+   "trailing12mSum": 1.59,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 1553,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00929"
+  },
+  {
+   "code": "00930",
+   "name": "永豐ESG低碳高息",
+   "issuer": "永豐證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 23.88,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.815,
+    "exDate": "2026-09-23"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "雙月配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 6,
+   "annualizedYield": 20.477386934673365,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.815,
+     "exDate": "2026-09-23",
+     "paymentDate": "2026-10-20"
+    },
+    {
+     "amount": 0.25,
+     "exDate": "2026-07-27",
+     "paymentDate": "2026-08-20"
+    },
+    {
+     "amount": 0.31,
+     "exDate": "2026-05-26",
+     "paymentDate": "2026-06-18"
+    },
+    {
+     "amount": 0.15,
+     "exDate": "2026-03-23",
+     "paymentDate": "2026-04-20"
+    },
+    {
+     "amount": 0.141,
+     "exDate": "2026-01-20",
+     "paymentDate": "2026-02-13"
+    }
+   ],
+   "trailingAnnualDividend": 1.2765,
+   "trailingYield": 5.3454773869346734,
+   "trailing12mSum": 0.851,
+   "trailing12mCount": 4,
+   "trailingBasis": "配息紀錄不足一年，以近 4 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 38,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00930"
+  },
+  {
+   "code": "00932",
+   "name": "兆豐永續高息等權",
+   "issuer": "兆豐國際證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 17.48,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.23,
+    "exDate": "2026-08-18"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "季配",
+   "frequencyBasis": "官方收益分配條款",
+   "paymentsPerYear": 4,
+   "annualizedYield": 5.2631578947368425,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.23,
+     "exDate": "2026-08-18",
+     "paymentDate": "2026-09-04"
+    },
+    {
+     "amount": 0.22,
+     "exDate": "2026-05-19",
+     "paymentDate": "2026-06-05"
+    },
+    {
+     "amount": 0.22,
+     "exDate": "2026-02-26",
+     "paymentDate": "2026-03-18"
+    },
+    {
+     "amount": 0.2,
+     "exDate": null,
+     "paymentDate": "2025-12-05"
+    }
+   ],
+   "trailingAnnualDividend": 0.87,
+   "trailingYield": 4.977116704805492,
+   "trailing12mSum": 0.87,
+   "trailing12mCount": 4,
+   "trailingBasis": "近 12 個月實際配息",
+   "trailingComplete": true,
+   "aumBillionTwd": 19,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00932"
+  },
+  {
+   "code": "00934",
+   "name": "中信成長高股息",
+   "issuer": "中國信託證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 29.84,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.33,
+    "exDate": "2026-09-16"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "月配",
+   "frequencyBasis": "官方收益分配條款",
+   "paymentsPerYear": 12,
+   "annualizedYield": 13.270777479892763,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.33,
+     "exDate": "2026-09-16",
+     "paymentDate": "2026-10-15"
+    },
+    {
+     "amount": 0.3,
+     "exDate": "2026-08-18",
+     "paymentDate": "2026-09-11"
+    },
+    {
+     "amount": 0.3,
+     "exDate": "2026-07-16",
+     "paymentDate": "2026-08-11"
+    },
+    {
+     "amount": 0.25,
+     "exDate": "2026-06-16",
+     "paymentDate": "2026-07-13"
+    },
+    {
+     "amount": 0.25,
+     "exDate": "2026-05-19",
+     "paymentDate": "2026-06-12"
+    },
+    {
+     "amount": 0.143,
+     "exDate": "2026-04-20",
+     "paymentDate": "2026-05-15"
+    },
+    {
+     "amount": 0.14,
+     "exDate": "2026-03-17",
+     "paymentDate": "2026-04-14"
+    },
+    {
+     "amount": 0.14,
+     "exDate": "2026-02-26",
+     "paymentDate": "2026-03-25"
+    },
+    {
+     "amount": 0.132,
+     "exDate": "2026-01-19",
+     "paymentDate": "2026-02-23"
+    }
+   ],
+   "trailingAnnualDividend": 2.4825,
+   "trailingYield": 8.319369973190348,
+   "trailing12mSum": 1.655,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 128,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00934"
+  },
+  {
+   "code": "00936",
+   "name": "台新永續高息中小",
+   "issuer": "台新證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 21.41,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.16,
+    "exDate": "2026-09-15"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "月配",
+   "frequencyBasis": "官方收益分配條款",
+   "paymentsPerYear": 12,
+   "annualizedYield": 8.967772069126575,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.16,
+     "exDate": "2026-09-15",
+     "paymentDate": "2026-10-07"
+    },
+    {
+     "amount": 0.12,
+     "exDate": "2026-08-17",
+     "paymentDate": "2026-09-04"
+    },
+    {
+     "amount": 0.12,
+     "exDate": "2026-07-15",
+     "paymentDate": "2026-08-04"
+    },
+    {
+     "amount": 0.12,
+     "exDate": "2026-06-15",
+     "paymentDate": "2026-07-06"
+    },
+    {
+     "amount": 0.1,
+     "exDate": "2026-05-18",
+     "paymentDate": "2026-06-05"
+    },
+    {
+     "amount": 0.1,
+     "exDate": "2026-04-17",
+     "paymentDate": "2026-05-08"
+    },
+    {
+     "amount": 0.1,
+     "exDate": "2026-03-16",
+     "paymentDate": "2026-04-07"
+    },
+    {
+     "amount": 0.1,
+     "exDate": "2026-02-25",
+     "paymentDate": "2026-03-18"
+    },
+    {
+     "amount": 0.06,
+     "exDate": "2026-01-16",
+     "paymentDate": "2026-02-05"
+    }
+   ],
+   "trailingAnnualDividend": 1.23,
+   "trailingYield": 5.744978981784213,
+   "trailing12mSum": 0.82,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 42,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00936"
+  },
+  {
+   "code": "00939",
+   "name": "統一台灣高息動能",
+   "issuer": "統一證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 24.13,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.125,
+    "exDate": "2026-09-01"
+   },
+   "nextDividend": {
+    "amount": 0.125,
+    "exDate": "2026-10-05"
+   },
+   "nextDividendSource": "公告預估",
+   "frequency": "月配",
+   "frequencyBasis": "官方收益分配條款",
+   "paymentsPerYear": 12,
+   "annualizedYield": 6.216328222130129,
+   "yieldBasis": "下次配息（公告預估）",
+   "recentDividends": [
+    {
+     "amount": 0.125,
+     "exDate": "2026-09-01",
+     "paymentDate": "2026-09-23"
+    },
+    {
+     "amount": 0.125,
+     "exDate": "2026-07-31",
+     "paymentDate": "2026-08-24"
+    },
+    {
+     "amount": 0.125,
+     "exDate": "2026-07-02",
+     "paymentDate": "2026-07-24"
+    },
+    {
+     "amount": 0.072,
+     "exDate": "2026-06-02",
+     "paymentDate": "2026-06-25"
+    },
+    {
+     "amount": 0.072,
+     "exDate": "2026-05-04",
+     "paymentDate": "2026-05-26"
+    },
+    {
+     "amount": 0.072,
+     "exDate": "2026-03-31",
+     "paymentDate": "2026-04-24"
+    },
+    {
+     "amount": 0.072,
+     "exDate": "2026-03-11",
+     "paymentDate": "2026-04-02"
+    },
+    {
+     "amount": 0.072,
+     "exDate": "2026-02-02",
+     "paymentDate": "2026-03-04"
+    }
+   ],
+   "trailingAnnualDividend": 1.1025,
+   "trailingYield": 4.569001243265645,
+   "trailing12mSum": 0.735,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 281,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00939"
+  },
+  {
+   "code": "00940",
+   "name": "元大台灣價值高息",
+   "issuer": "元大證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 13.1,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.055,
+    "exDate": "2026-09-08"
+   },
+   "nextDividend": {
+    "amount": 0.055,
+    "exDate": "2026-10-07"
+   },
+   "nextDividendSource": "公告預估",
+   "frequency": "月配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 12,
+   "annualizedYield": 5.0381679389312986,
+   "yieldBasis": "下次配息（公告預估）",
+   "recentDividends": [
+    {
+     "amount": 0.055,
+     "exDate": "2026-09-08",
+     "paymentDate": "2026-10-01"
+    },
+    {
+     "amount": 0.05,
+     "exDate": "2026-08-11",
+     "paymentDate": "2026-09-01"
+    },
+    {
+     "amount": 0.05,
+     "exDate": "2026-07-09",
+     "paymentDate": "2026-08-03"
+    },
+    {
+     "amount": 0.05,
+     "exDate": "2026-06-09",
+     "paymentDate": "2026-07-01"
+    },
+    {
+     "amount": 0.045,
+     "exDate": "2026-05-07",
+     "paymentDate": "2026-06-01"
+    },
+    {
+     "amount": 0.045,
+     "exDate": "2026-04-09",
+     "paymentDate": "2026-05-04"
+    },
+    {
+     "amount": 0.045,
+     "exDate": "2026-03-11",
+     "paymentDate": "2026-04-01"
+    },
+    {
+     "amount": 0.045,
+     "exDate": "2026-02-02",
+     "paymentDate": "2026-03-02"
+    },
+    {
+     "amount": 0.045,
+     "exDate": "2026-01-08",
+     "paymentDate": "2026-02-02"
+    }
+   ],
+   "trailingAnnualDividend": 0.5625,
+   "trailingYield": 4.293893129770993,
+   "trailing12mSum": 0.375,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 670,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00940"
+  },
+  {
+   "code": "00943",
+   "name": "兆豐電子高息等權",
+   "issuer": "兆豐國際證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 20.96,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.25,
+    "exDate": "2026-09-16"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "月配",
+   "frequencyBasis": "官方收益分配條款",
+   "paymentsPerYear": 12,
+   "annualizedYield": 14.31297709923664,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.25,
+     "exDate": "2026-09-16",
+     "paymentDate": "2026-10-07"
+    },
+    {
+     "amount": 0.12,
+     "exDate": "2026-08-18",
+     "paymentDate": "2026-09-04"
+    },
+    {
+     "amount": 0.12,
+     "exDate": "2026-07-16",
+     "paymentDate": "2026-08-04"
+    },
+    {
+     "amount": 0.12,
+     "exDate": "2026-06-16",
+     "paymentDate": "2026-07-06"
+    },
+    {
+     "amount": 0.09,
+     "exDate": "2026-05-19",
+     "paymentDate": "2026-06-05"
+    },
+    {
+     "amount": 0.071,
+     "exDate": "2026-04-20",
+     "paymentDate": "2026-05-08"
+    },
+    {
+     "amount": 0.072,
+     "exDate": "2026-03-17",
+     "paymentDate": "2026-04-07"
+    },
+    {
+     "amount": 0.07,
+     "exDate": "2026-02-26",
+     "paymentDate": "2026-03-18"
+    },
+    {
+     "amount": 0.065,
+     "exDate": "2026-01-19",
+     "paymentDate": "2026-02-05"
+    }
+   ],
+   "trailingAnnualDividend": 1.092,
+   "trailingYield": 5.209923664122138,
+   "trailing12mSum": 0.728,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 9,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00943"
+  },
+  {
+   "code": "00944",
+   "name": "野村趨勢動能高息",
+   "issuer": "野村證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 22,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.109,
+    "exDate": "2026-09-16"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "月配",
+   "frequencyBasis": "官方收益分配條款",
+   "paymentsPerYear": 12,
+   "annualizedYield": 5.945454545454545,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.109,
+     "exDate": "2026-09-16",
+     "paymentDate": "2026-10-15"
+    },
+    {
+     "amount": 0.109,
+     "exDate": "2026-08-18",
+     "paymentDate": "2026-09-11"
+    },
+    {
+     "amount": 0.109,
+     "exDate": "2026-07-16",
+     "paymentDate": "2026-08-13"
+    },
+    {
+     "amount": 0.054,
+     "exDate": "2026-06-16",
+     "paymentDate": "2026-07-10"
+    },
+    {
+     "amount": 0.054,
+     "exDate": "2026-05-19",
+     "paymentDate": "2026-06-12"
+    },
+    {
+     "amount": 0.054,
+     "exDate": "2026-04-20",
+     "paymentDate": "2026-05-15"
+    },
+    {
+     "amount": 0.054,
+     "exDate": "2026-03-17",
+     "paymentDate": "2026-04-14"
+    },
+    {
+     "amount": 0.054,
+     "exDate": "2026-02-26",
+     "paymentDate": "2026-03-26"
+    },
+    {
+     "amount": 0.054,
+     "exDate": "2026-01-19",
+     "paymentDate": "2026-02-12"
+    }
+   ],
+   "trailingAnnualDividend": 0.813,
+   "trailingYield": 3.6954545454545453,
+   "trailing12mSum": 0.542,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 12,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00944"
+  },
+  {
+   "code": "00946",
+   "name": "群益科技高息成長",
+   "issuer": "群益證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 15.3,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.058,
+    "exDate": "2026-09-02"
+   },
+   "nextDividend": {
+    "amount": 0.058,
+    "exDate": "2026-10-07"
+   },
+   "nextDividendSource": "公告預估",
+   "frequency": "月配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 12,
+   "annualizedYield": 4.549019607843138,
+   "yieldBasis": "下次配息（公告預估）",
+   "recentDividends": [
+    {
+     "amount": 0.058,
+     "exDate": "2026-09-02",
+     "paymentDate": "2026-09-30"
+    },
+    {
+     "amount": 0.058,
+     "exDate": "2026-08-04",
+     "paymentDate": "2026-08-28"
+    },
+    {
+     "amount": 0.058,
+     "exDate": "2026-07-06",
+     "paymentDate": "2026-07-30"
+    },
+    {
+     "amount": 0.058,
+     "exDate": "2026-06-02",
+     "paymentDate": "2026-06-29"
+    },
+    {
+     "amount": 0.058,
+     "exDate": "2026-05-06",
+     "paymentDate": "2026-05-29"
+    },
+    {
+     "amount": 0.058,
+     "exDate": "2026-04-02",
+     "paymentDate": "2026-04-30"
+    },
+    {
+     "amount": 0.058,
+     "exDate": "2026-03-12",
+     "paymentDate": "2026-04-09"
+    },
+    {
+     "amount": 0.058,
+     "exDate": "2026-02-03",
+     "paymentDate": "2026-03-11"
+    },
+    {
+     "amount": 0.058,
+     "exDate": "2026-01-06",
+     "paymentDate": "2026-01-30"
+    }
+   ],
+   "trailingAnnualDividend": 0.696,
+   "trailingYield": 4.549019607843137,
+   "trailing12mSum": 0.464,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 67,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00946"
+  },
+  {
+   "code": "00956",
+   "name": "中信日經高股息",
+   "issuer": "中國信託證券投資信託股份有限公司",
+   "region": "國外",
+   "regionDetail": "日本",
+   "price": 13.56,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.3,
+    "exDate": "2026-07-16"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "季配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 4,
+   "annualizedYield": 8.849557522123893,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.3,
+     "exDate": "2026-07-16",
+     "paymentDate": "2026-08-11"
+    },
+    {
+     "amount": 0.2,
+     "exDate": "2026-04-20",
+     "paymentDate": "2026-05-15"
+    },
+    {
+     "amount": 0.26,
+     "exDate": "2026-01-19",
+     "paymentDate": "2026-02-23"
+    },
+    {
+     "amount": 0.16,
+     "exDate": null,
+     "paymentDate": "2025-11-14"
+    }
+   ],
+   "trailingAnnualDividend": 0.92,
+   "trailingYield": 6.784660766961652,
+   "trailing12mSum": 0.92,
+   "trailing12mCount": 4,
+   "trailingBasis": "近 12 個月實際配息",
+   "trailingComplete": true,
+   "aumBillionTwd": 4,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00956"
+  },
+  {
+   "code": "00961",
+   "name": "FT臺灣永續高息",
+   "issuer": "富蘭克林華美證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 13.2,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.19,
+    "exDate": "2026-09-16"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "月配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 12,
+   "annualizedYield": 17.272727272727277,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.19,
+     "exDate": "2026-09-16",
+     "paymentDate": "2026-10-14"
+    },
+    {
+     "amount": 0.19,
+     "exDate": "2026-08-18",
+     "paymentDate": "2026-09-10"
+    },
+    {
+     "amount": 0.19,
+     "exDate": "2026-07-16",
+     "paymentDate": "2026-08-12"
+    },
+    {
+     "amount": 0.15,
+     "exDate": "2026-06-16",
+     "paymentDate": "2026-07-09"
+    },
+    {
+     "amount": 0.108,
+     "exDate": "2026-05-19",
+     "paymentDate": "2026-06-11"
+    },
+    {
+     "amount": 0.049,
+     "exDate": "2026-04-20",
+     "paymentDate": "2026-05-14"
+    },
+    {
+     "amount": 0.122,
+     "exDate": "2026-03-17",
+     "paymentDate": "2026-04-13"
+    },
+    {
+     "amount": 0.06,
+     "exDate": "2026-02-26",
+     "paymentDate": "2026-03-25"
+    },
+    {
+     "amount": 0.02,
+     "exDate": "2026-01-19",
+     "paymentDate": "2026-02-11"
+    }
+   ],
+   "trailingAnnualDividend": 1.3335,
+   "trailingYield": 10.102272727272728,
+   "trailing12mSum": 0.889,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 151,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00961"
+  },
+  {
+   "code": "00962",
+   "name": "台新AI優息動能",
+   "issuer": "台新證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 15.03,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.25,
+    "exDate": "2026-09-15"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "月配",
+   "frequencyBasis": "官方收益分配條款",
+   "paymentsPerYear": 12,
+   "annualizedYield": 19.960079840319363,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.25,
+     "exDate": "2026-09-15",
+     "paymentDate": "2026-10-07"
+    },
+    {
+     "amount": 0.16,
+     "exDate": "2026-08-17",
+     "paymentDate": "2026-09-04"
+    },
+    {
+     "amount": 0.08,
+     "exDate": "2026-07-15",
+     "paymentDate": "2026-08-04"
+    },
+    {
+     "amount": 0.08,
+     "exDate": "2026-06-15",
+     "paymentDate": "2026-07-06"
+    },
+    {
+     "amount": 0.05,
+     "exDate": "2026-05-18",
+     "paymentDate": "2026-06-05"
+    },
+    {
+     "amount": 0.05,
+     "exDate": "2026-04-17",
+     "paymentDate": "2026-05-08"
+    },
+    {
+     "amount": 0.05,
+     "exDate": "2026-03-16",
+     "paymentDate": "2026-04-07"
+    },
+    {
+     "amount": 0.03,
+     "exDate": "2026-02-25",
+     "paymentDate": "2026-03-18"
+    },
+    {
+     "amount": 0.03,
+     "exDate": "2026-01-16",
+     "paymentDate": "2026-02-05"
+    }
+   ],
+   "trailingAnnualDividend": 0.795,
+   "trailingYield": 5.289421157684631,
+   "trailing12mSum": 0.53,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 16,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00962"
+  },
+  {
+   "code": "00963",
+   "name": "中信全球高股息",
+   "issuer": "中國信託證券投資信託股份有限公司",
+   "region": "國外",
+   "regionDetail": "全球",
+   "price": 12.63,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.1,
+    "exDate": "2026-09-16"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "月配",
+   "frequencyBasis": "官方收益分配條款",
+   "paymentsPerYear": 12,
+   "annualizedYield": 9.501187648456058,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.1,
+     "exDate": "2026-09-16",
+     "paymentDate": "2026-10-15"
+    },
+    {
+     "amount": 0.1,
+     "exDate": "2026-08-18",
+     "paymentDate": "2026-09-11"
+    },
+    {
+     "amount": 0.095,
+     "exDate": "2026-07-16",
+     "paymentDate": "2026-08-11"
+    },
+    {
+     "amount": 0.09,
+     "exDate": "2026-06-16",
+     "paymentDate": "2026-07-13"
+    },
+    {
+     "amount": 0.086,
+     "exDate": "2026-05-19",
+     "paymentDate": "2026-06-12"
+    },
+    {
+     "amount": 0.045,
+     "exDate": "2026-04-20",
+     "paymentDate": "2026-05-15"
+    },
+    {
+     "amount": 0.045,
+     "exDate": "2026-03-17",
+     "paymentDate": "2026-04-14"
+    },
+    {
+     "amount": 0.045,
+     "exDate": "2026-02-26",
+     "paymentDate": "2026-03-25"
+    },
+    {
+     "amount": 0.045,
+     "exDate": "2026-01-19",
+     "paymentDate": "2026-02-23"
+    }
+   ],
+   "trailingAnnualDividend": 0.8265,
+   "trailingYield": 6.5439429928741095,
+   "trailing12mSum": 0.551,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 15,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00963"
+  },
+  {
+   "code": "00964",
+   "name": "中信亞太高股息",
+   "issuer": "中國信託證券投資信託股份有限公司",
+   "region": "國外",
+   "regionDetail": "亞太",
+   "price": 14.73,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.2,
+    "exDate": "2026-09-16"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "月配",
+   "frequencyBasis": "官方收益分配條款",
+   "paymentsPerYear": 12,
+   "annualizedYield": 16.29327902240326,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.2,
+     "exDate": "2026-09-16",
+     "paymentDate": "2026-10-15"
+    },
+    {
+     "amount": 0.12,
+     "exDate": "2026-08-18",
+     "paymentDate": "2026-09-11"
+    },
+    {
+     "amount": 0.12,
+     "exDate": "2026-07-16",
+     "paymentDate": "2026-08-11"
+    },
+    {
+     "amount": 0.106,
+     "exDate": "2026-06-16",
+     "paymentDate": "2026-07-13"
+    },
+    {
+     "amount": 0.1,
+     "exDate": "2026-05-19",
+     "paymentDate": "2026-06-12"
+    },
+    {
+     "amount": 0.1,
+     "exDate": "2026-04-20",
+     "paymentDate": "2026-05-15"
+    },
+    {
+     "amount": 0.093,
+     "exDate": "2026-03-17",
+     "paymentDate": "2026-04-14"
+    },
+    {
+     "amount": 0.089,
+     "exDate": "2026-02-26",
+     "paymentDate": "2026-03-25"
+    },
+    {
+     "amount": 0.088,
+     "exDate": "2026-01-19",
+     "paymentDate": "2026-02-23"
+    }
+   ],
+   "trailingAnnualDividend": 1.224,
+   "trailingYield": 8.309572301425662,
+   "trailing12mSum": 0.816,
+   "trailing12mCount": 8,
+   "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 11,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00964"
+  },
+  {
+   "code": "00972",
+   "name": "野村日本動能高息",
+   "issuer": "野村證券投資信託股份有限公司",
+   "region": "國外",
+   "regionDetail": "日本",
+   "price": 21.7,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.22,
+    "exDate": "2026-09-16"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "季配",
+   "frequencyBasis": "官方收益分配條款",
+   "paymentsPerYear": 4,
+   "annualizedYield": 4.055299539170507,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.22,
+     "exDate": "2026-09-16",
+     "paymentDate": "2026-10-15"
+    },
+    {
+     "amount": 0.22,
+     "exDate": "2026-06-16",
+     "paymentDate": "2026-07-10"
+    },
+    {
+     "amount": 0.27,
+     "exDate": "2026-03-17",
+     "paymentDate": "2026-04-14"
+    },
+    {
+     "amount": 0.27,
+     "exDate": null,
+     "paymentDate": "2026-01-13"
+    }
+   ],
+   "trailingAnnualDividend": 1.0133,
+   "trailingYield": 4.669585253456222,
+   "trailing12mSum": 0.76,
+   "trailing12mCount": 3,
+   "trailingBasis": "配息紀錄不足一年，以近 3 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 3,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00972"
+  },
+  {
+   "code": "00984A",
+   "name": "主動安聯台灣高息",
+   "issuer": "安聯證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 15.61,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.415,
+    "exDate": "2026-07-16"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "季配",
+   "frequencyBasis": "近次實際配息間隔",
+   "paymentsPerYear": 4,
+   "annualizedYield": 10.634208840486867,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.415,
+     "exDate": "2026-07-16",
+     "paymentDate": "2026-08-11"
+    },
+    {
+     "amount": 0.268,
+     "exDate": "2026-04-20",
+     "paymentDate": "2026-05-15"
+    },
+    {
+     "amount": 0.168,
+     "exDate": "2026-01-19",
+     "paymentDate": "2026-02-12"
+    },
+    {
+     "amount": 0.21,
+     "exDate": null,
+     "paymentDate": "2025-11-13"
+    }
+   ],
+   "trailingAnnualDividend": 1.061,
+   "trailingYield": 6.796925048046123,
+   "trailing12mSum": 1.061,
+   "trailing12mCount": 4,
+   "trailingBasis": "近 12 個月實際配息",
+   "trailingComplete": true,
+   "aumBillionTwd": 98,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00984A"
+  },
+  {
+   "code": "00999A",
+   "name": "主動野村臺灣高息",
+   "issuer": "野村證券投資信託股份有限公司",
+   "region": "國內",
+   "regionDetail": "國內成分證券",
+   "price": 11.35,
+   "closeDate": "2026-09-24",
+   "latestDividend": {
+    "amount": 0.29,
+    "exDate": "2026-09-16"
+   },
+   "nextDividend": null,
+   "nextDividendSource": null,
+   "frequency": "季配",
+   "frequencyBasis": "官方公開說明書",
+   "paymentsPerYear": 4,
+   "annualizedYield": 10.220264317180616,
+   "yieldBasis": "最近一次配息",
+   "recentDividends": [
+    {
+     "amount": 0.29,
+     "exDate": "2026-09-16",
+     "paymentDate": "2026-10-15"
+    }
+   ],
+   "trailingAnnualDividend": 1.16,
+   "trailingYield": 10.220264317180616,
+   "trailing12mSum": null,
+   "trailing12mCount": 0,
+   "trailingBasis": "配息紀錄不足一年，以近 1 次平均推估",
+   "trailingComplete": false,
+   "aumBillionTwd": 116,
+   "hasIncomeEqualization": true,
+   "equalizationBasis": "官方收益分配條款",
+   "sourceUrl": "https://www.twse.com.tw/zh/ETFortune-institute/etfInfo/00999A"
   }
  ],
  "sources": {
