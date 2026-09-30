@@ -1,5 +1,5 @@
 {
- "asOf": "2026-09-30T06:52:03.738Z",
+ "asOf": "2026-09-30T12:48:28.269Z",
  "marketStatus": "收盤",
  "scope": "每次同步依證交所「高股息」與「高息低波動」主題分類重建，收錄該分類下的全部臺灣掛牌 ETF；再與證交所「國內成分證券 ETF」及「國內主動式 ETF」官方清單比對，標示每一檔的投資地區。",
  "etfs": [
@@ -348,13 +348,16 @@
     "amount": 0.11,
     "exDate": "2026-09-16"
    },
-   "nextDividend": null,
-   "nextDividendSource": null,
+   "nextDividend": {
+    "amount": 0.11,
+    "exDate": "2026-10-19"
+   },
+   "nextDividendSource": "公告預估",
    "frequency": "月配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 12,
    "annualizedYield": 4.441453566621804,
-   "yieldBasis": "最近一次配息",
+   "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
      "amount": 0.11,
@@ -623,13 +626,16 @@
     "amount": 0.075,
     "exDate": "2026-09-16"
    },
-   "nextDividend": null,
-   "nextDividendSource": null,
+   "nextDividend": {
+    "amount": 0.075,
+    "exDate": "2026-10-19"
+   },
+   "nextDividendSource": "公告預估",
    "frequency": "月配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 12,
    "annualizedYield": 4.639175257731959,
-   "yieldBasis": "最近一次配息",
+   "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
      "amount": 0.075,
@@ -1408,13 +1414,16 @@
     "amount": 0.25,
     "exDate": "2026-09-16"
    },
-   "nextDividend": null,
-   "nextDividendSource": null,
+   "nextDividend": {
+    "amount": 0.36,
+    "exDate": "2026-10-19"
+   },
+   "nextDividendSource": "公告預估",
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
-   "annualizedYield": 14.2721217887726,
-   "yieldBasis": "最近一次配息",
+   "annualizedYield": 20.55185537583254,
+   "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
      "amount": 0.25,
@@ -1485,13 +1494,16 @@
     "amount": 0.109,
     "exDate": "2026-09-16"
    },
-   "nextDividend": null,
-   "nextDividendSource": null,
+   "nextDividend": {
+    "amount": 0.109,
+    "exDate": "2026-10-19"
+   },
+   "nextDividendSource": "公告預估",
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
    "annualizedYield": 5.958997722095673,
-   "yieldBasis": "最近一次配息",
+   "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
      "amount": 0.109,
