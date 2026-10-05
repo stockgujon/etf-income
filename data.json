@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-04T15:53:16.155Z",
+ "asOf": "2026-10-05T07:12:37.553Z",
  "marketStatus": "收盤",
  "scope": "每次同步依證交所「高股息」與「高息低波動」主題分類重建，收錄該分類下的全部臺灣掛牌 ETF；再與證交所「國內成分證券 ETF」及「國內主動式 ETF」官方清單比對，標示每一檔的投資地區。",
  "etfs": [
@@ -9,8 +9,8 @@
    "issuer": "國泰證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 15.78,
-   "closeDate": "2026-10-02",
+   "price": 16.52,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.12,
     "exDate": "2026-09-07"
@@ -23,7 +23,7 @@
    "frequency": "月配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 12,
-   "annualizedYield": 9.125475285171103,
+   "annualizedYield": 8.716707021791766,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -43,10 +43,10 @@
     }
    ],
    "trailingAnnualDividend": 1.44,
-   "trailingYield": 9.125475285171103,
-   "trailing12mSum": 0.24,
-   "trailing12mCount": 2,
-   "trailingBasis": "配息紀錄不足一年，以近 2 次平均推估",
+   "trailingYield": 8.716707021791766,
+   "trailing12mSum": 0.36,
+   "trailing12mCount": 3,
+   "trailingBasis": "配息紀錄不足一年，以近 3 次平均推估",
    "trailingComplete": false,
    "aumBillionTwd": 294,
    "hasIncomeEqualization": true,
@@ -59,8 +59,8 @@
    "issuer": "富邦證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 9.42,
-   "closeDate": "2026-10-02",
+   "price": 9.86,
+   "closeDate": "2026-10-05",
    "latestDividend": null,
    "nextDividend": null,
    "nextDividendSource": null,
@@ -87,8 +87,8 @@
    "issuer": "元大證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 57.05,
-   "closeDate": "2026-10-02",
+   "price": 57.85,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 1.35,
     "exDate": "2026-07-21"
@@ -101,7 +101,7 @@
    "frequency": "季配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 4,
-   "annualizedYield": 12.05959684487292,
+   "annualizedYield": 11.892826274848746,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -126,7 +126,7 @@
     }
    ],
    "trailingAnnualDividend": 4.082,
-   "trailingYield": 7.155127081507449,
+   "trailingYield": 7.056179775280899,
    "trailing12mSum": 4.082,
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
@@ -142,8 +142,8 @@
    "issuer": "國泰證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 41.32,
-   "closeDate": "2026-10-02",
+   "price": 41.02,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 1.6,
     "exDate": "2026-08-18"
@@ -153,7 +153,7 @@
    "frequency": "半年配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 2,
-   "annualizedYield": 7.744433688286545,
+   "annualizedYield": 7.80107264748903,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -178,7 +178,7 @@
     }
    ],
    "trailingAnnualDividend": 2.3,
-   "trailingYield": 5.566311713455953,
+   "trailingYield": 5.607020965382739,
    "trailing12mSum": 2.3,
    "trailing12mCount": 2,
    "trailingBasis": "近 12 個月實際配息",
@@ -194,8 +194,8 @@
    "issuer": "國泰證券投資信託股份有限公司",
    "region": "國外",
    "regionDetail": "美國",
-   "price": 23.15,
-   "closeDate": "2026-10-02",
+   "price": 23.12,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.68,
     "exDate": "2026-07-16"
@@ -205,7 +205,7 @@
    "frequency": "半年配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 2,
-   "annualizedYield": 5.874730021598273,
+   "annualizedYield": 5.88235294117647,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -220,7 +220,7 @@
     }
    ],
    "trailingAnnualDividend": 1.33,
-   "trailingYield": 5.745140388768899,
+   "trailingYield": 5.752595155709343,
    "trailing12mSum": 1.33,
    "trailing12mCount": 2,
    "trailingBasis": "近 12 個月實際配息",
@@ -236,8 +236,8 @@
    "issuer": "元大證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 62.7,
-   "closeDate": "2026-10-02",
+   "price": 62.85,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 1.25,
     "exDate": "2026-09-21"
@@ -247,7 +247,7 @@
    "frequency": "季配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 4,
-   "annualizedYield": 7.974481658692184,
+   "annualizedYield": 7.955449482895784,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -277,7 +277,7 @@
     }
    ],
    "trailingAnnualDividend": 3.34,
-   "trailingYield": 5.326953748006379,
+   "trailingYield": 5.314240254574383,
    "trailing12mSum": 3.34,
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
@@ -293,8 +293,8 @@
    "issuer": "富邦證券投資信託股份有限公司",
    "region": "國外",
    "regionDetail": "美國",
-   "price": 14.55,
-   "closeDate": "2026-10-02",
+   "price": 14.51,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.141,
     "exDate": "2026-07-16"
@@ -307,7 +307,7 @@
    "frequency": "季配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 4,
-   "annualizedYield": 3.876288659793814,
+   "annualizedYield": 3.8869745003445892,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -332,7 +332,7 @@
     }
    ],
    "trailingAnnualDividend": 0.564,
-   "trailingYield": 3.876288659793814,
+   "trailingYield": 3.8869745003445892,
    "trailing12mSum": 0.564,
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
@@ -348,8 +348,8 @@
    "issuer": "富邦證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 29.74,
-   "closeDate": "2026-10-02",
+   "price": 30.16,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.11,
     "exDate": "2026-09-16"
@@ -362,7 +362,7 @@
    "frequency": "月配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 12,
-   "annualizedYield": 4.438466711499664,
+   "annualizedYield": 4.376657824933687,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -412,7 +412,7 @@
     }
    ],
    "trailingAnnualDividend": 1.32,
-   "trailingYield": 4.438466711499664,
+   "trailingYield": 4.376657824933687,
    "trailing12mSum": 0.88,
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
@@ -428,8 +428,8 @@
    "issuer": "復華證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 97.15,
-   "closeDate": "2026-10-02",
+   "price": 98.05,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 1.458,
     "exDate": "2026-08-19"
@@ -439,7 +439,7 @@
    "frequency": "季配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 4,
-   "annualizedYield": 6.0030880082346885,
+   "annualizedYield": 5.947985721570627,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -464,7 +464,7 @@
     }
    ],
    "trailingAnnualDividend": 3.614,
-   "trailingYield": 3.720020586721564,
+   "trailingYield": 3.6858745537990822,
    "trailing12mSum": 3.614,
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
@@ -480,8 +480,8 @@
    "issuer": "元大證券投資信託股份有限公司",
    "region": "國外",
    "regionDetail": "美國",
-   "price": 15.01,
-   "closeDate": "2026-10-02",
+   "price": 14.89,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.21,
     "exDate": "2026-08-21"
@@ -491,7 +491,7 @@
    "frequency": "季配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 4,
-   "annualizedYield": 5.596269153897401,
+   "annualizedYield": 5.641370047011416,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -516,7 +516,7 @@
     }
    ],
    "trailingAnnualDividend": 0.84,
-   "trailingYield": 5.596269153897401,
+   "trailingYield": 5.641370047011416,
    "trailing12mSum": 0.84,
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
@@ -532,8 +532,8 @@
    "issuer": "國泰證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 34.89,
-   "closeDate": "2026-10-02",
+   "price": 35.11,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 1.01,
     "exDate": "2026-08-18"
@@ -543,7 +543,7 @@
    "frequency": "季配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 4,
-   "annualizedYield": 11.579249068501003,
+   "annualizedYield": 11.506693249786386,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -568,7 +568,7 @@
     }
    ],
    "trailingAnnualDividend": 2.49,
-   "trailingYield": 7.13671539122958,
+   "trailingYield": 7.091996582170322,
    "trailing12mSum": 2.49,
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
@@ -584,8 +584,8 @@
    "issuer": "中國信託證券投資信託股份有限公司",
    "region": "國外",
    "regionDetail": "中國",
-   "price": 14.78,
-   "closeDate": "2026-10-02",
+   "price": 14.71,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.55,
     "exDate": "2026-07-16"
@@ -595,7 +595,7 @@
    "frequency": "半年配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 2,
-   "annualizedYield": 7.442489851150204,
+   "annualizedYield": 7.477906186267845,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -610,7 +610,7 @@
     }
    ],
    "trailingAnnualDividend": 1,
-   "trailingYield": 6.7658998646820026,
+   "trailingYield": 6.798096532970768,
    "trailing12mSum": 1,
    "trailing12mCount": 2,
    "trailingBasis": "近 12 個月實際配息",
@@ -626,8 +626,8 @@
    "issuer": "富邦證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 19.37,
-   "closeDate": "2026-10-02",
+   "price": 19.49,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.075,
     "exDate": "2026-09-16"
@@ -640,7 +640,7 @@
    "frequency": "月配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 12,
-   "annualizedYield": 4.646360351058337,
+   "annualizedYield": 4.617752693689072,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -690,7 +690,7 @@
     }
    ],
    "trailingAnnualDividend": 0.9,
-   "trailingYield": 4.646360351058338,
+   "trailingYield": 4.617752693689072,
    "trailing12mSum": 0.6,
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
@@ -706,8 +706,8 @@
    "issuer": "永豐證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 17.66,
-   "closeDate": "2026-10-02",
+   "price": 17.57,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.24,
     "exDate": "2026-08-25"
@@ -720,7 +720,7 @@
    "frequency": "雙月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 6,
-   "annualizedYield": 9.105322763306908,
+   "annualizedYield": 9.151963574274331,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -745,7 +745,7 @@
     }
    ],
    "trailingAnnualDividend": 1.2075,
-   "trailingYield": 6.837485843714609,
+   "trailingYield": 6.872509960159362,
    "trailing12mSum": 0.805,
    "trailing12mCount": 4,
    "trailingBasis": "配息紀錄不足一年，以近 4 次平均推估",
@@ -761,8 +761,8 @@
    "issuer": "凱基證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 32.97,
-   "closeDate": "2026-10-02",
+   "price": 32.86,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.6,
     "exDate": "2026-09-16"
@@ -772,7 +772,7 @@
    "frequency": "季配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 4,
-   "annualizedYield": 7.279344858962693,
+   "annualizedYield": 7.303712720632988,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -802,7 +802,7 @@
     }
    ],
    "trailingAnnualDividend": 1.47,
-   "trailingYield": 4.4585987261146505,
+   "trailingYield": 4.473524041387705,
    "trailing12mSum": 1.47,
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
@@ -818,8 +818,8 @@
    "issuer": "大華銀證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 33.81,
-   "closeDate": "2026-10-02",
+   "price": 33.89,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 1.75,
     "exDate": "2026-09-18"
@@ -829,7 +829,7 @@
    "frequency": "季配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 4,
-   "annualizedYield": 20.703933747412005,
+   "annualizedYield": 20.655060489820006,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -854,7 +854,7 @@
     }
    ],
    "trailingAnnualDividend": 3.26,
-   "trailingYield": 9.642117716651876,
+   "trailingYield": 9.619356742401889,
    "trailing12mSum": 2.445,
    "trailing12mCount": 3,
    "trailingBasis": "配息紀錄不足一年，以近 3 次平均推估",
@@ -870,8 +870,8 @@
    "issuer": "群益證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 31.55,
-   "closeDate": "2026-10-02",
+   "price": 31.63,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 1.1,
     "exDate": "2026-09-16"
@@ -881,7 +881,7 @@
    "frequency": "季配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 4,
-   "annualizedYield": 13.946117274167987,
+   "annualizedYield": 13.910844135314576,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -906,7 +906,7 @@
     }
    ],
    "trailingAnnualDividend": 3.0933,
-   "trailingYield": 9.80443740095087,
+   "trailingYield": 9.779639582674676,
    "trailing12mSum": 2.32,
    "trailing12mCount": 3,
    "trailingBasis": "配息紀錄不足一年，以近 3 次平均推估",
@@ -922,8 +922,8 @@
    "issuer": "復華證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 29.73,
-   "closeDate": "2026-10-02",
+   "price": 30.05,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.38,
     "exDate": "2026-09-17"
@@ -936,7 +936,7 @@
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
-   "annualizedYield": 15.338042381432897,
+   "annualizedYield": 15.17470881863561,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -986,7 +986,7 @@
     }
    ],
    "trailingAnnualDividend": 2.385,
-   "trailingYield": 8.022199798183651,
+   "trailingYield": 7.9367720465890175,
    "trailing12mSum": 1.59,
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
@@ -1002,8 +1002,8 @@
    "issuer": "永豐證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 23.75,
-   "closeDate": "2026-10-02",
+   "price": 23.99,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.815,
     "exDate": "2026-09-23"
@@ -1013,7 +1013,7 @@
    "frequency": "雙月配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 6,
-   "annualizedYield": 20.589473684210525,
+   "annualizedYield": 20.383493122134222,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -1043,7 +1043,7 @@
     }
    ],
    "trailingAnnualDividend": 1.2765,
-   "trailingYield": 5.374736842105262,
+   "trailingYield": 5.320967069612339,
    "trailing12mSum": 0.851,
    "trailing12mCount": 4,
    "trailingBasis": "配息紀錄不足一年，以近 4 次平均推估",
@@ -1059,8 +1059,8 @@
    "issuer": "兆豐國際證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 17.56,
-   "closeDate": "2026-10-02",
+   "price": 17.58,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.23,
     "exDate": "2026-08-18"
@@ -1070,7 +1070,7 @@
    "frequency": "季配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 4,
-   "annualizedYield": 5.239179954441914,
+   "annualizedYield": 5.233219567690559,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -1095,7 +1095,7 @@
     }
    ],
    "trailingAnnualDividend": 0.87,
-   "trailingYield": 4.954441913439636,
+   "trailingYield": 4.948805460750854,
    "trailing12mSum": 0.87,
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
@@ -1111,8 +1111,8 @@
    "issuer": "中國信託證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 30.01,
-   "closeDate": "2026-10-02",
+   "price": 30.08,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.33,
     "exDate": "2026-09-16"
@@ -1125,7 +1125,7 @@
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
-   "annualizedYield": 19.99333555481506,
+   "annualizedYield": 19.9468085106383,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -1175,7 +1175,7 @@
     }
    ],
    "trailingAnnualDividend": 2.4825,
-   "trailingYield": 8.272242585804731,
+   "trailingYield": 8.252992021276597,
    "trailing12mSum": 1.655,
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
@@ -1191,8 +1191,8 @@
    "issuer": "台新證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 21.74,
-   "closeDate": "2026-10-02",
+   "price": 21.8,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.16,
     "exDate": "2026-09-15"
@@ -1202,7 +1202,7 @@
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
-   "annualizedYield": 8.831646734130635,
+   "annualizedYield": 8.807339449541283,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -1252,7 +1252,7 @@
     }
    ],
    "trailingAnnualDividend": 1.23,
-   "trailingYield": 5.657773689052438,
+   "trailingYield": 5.642201834862385,
    "trailing12mSum": 0.82,
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
@@ -1268,26 +1268,23 @@
    "issuer": "統一證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 24,
-   "closeDate": "2026-10-02",
+   "price": 23.87,
+   "closeDate": "2026-10-05",
    "latestDividend": {
-    "amount": 0.125,
-    "exDate": "2026-09-01"
-   },
-   "nextDividend": {
     "amount": 0.125,
     "exDate": "2026-10-05"
    },
-   "nextDividendSource": "證交所配息清單",
+   "nextDividend": null,
+   "nextDividendSource": null,
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
-   "annualizedYield": 6.25,
-   "yieldBasis": "下次已公告配息",
+   "annualizedYield": 6.284038542103058,
+   "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
      "amount": 0.125,
-     "exDate": null,
+     "exDate": "2026-10-05",
      "paymentDate": "2026-10-29"
     },
     {
@@ -1332,7 +1329,7 @@
     }
    ],
    "trailingAnnualDividend": 1.1025,
-   "trailingYield": 4.59375,
+   "trailingYield": 4.618768328445748,
    "trailing12mSum": 0.735,
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
@@ -1348,8 +1345,8 @@
    "issuer": "元大證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 13.17,
-   "closeDate": "2026-10-02",
+   "price": 13.26,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.055,
     "exDate": "2026-09-08"
@@ -1362,7 +1359,7 @@
    "frequency": "月配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 12,
-   "annualizedYield": 5.011389521640091,
+   "annualizedYield": 4.97737556561086,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -1412,7 +1409,7 @@
     }
    ],
    "trailingAnnualDividend": 0.5733,
-   "trailingYield": 4.353075170842825,
+   "trailingYield": 4.323529411764706,
    "trailing12mSum": 0.43,
    "trailing12mCount": 9,
    "trailingBasis": "配息紀錄不足一年，以近 9 次平均推估",
@@ -1428,8 +1425,8 @@
    "issuer": "兆豐國際證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 21.25,
-   "closeDate": "2026-10-02",
+   "price": 21.36,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.25,
     "exDate": "2026-09-16"
@@ -1442,7 +1439,7 @@
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
-   "annualizedYield": 20.329411764705885,
+   "annualizedYield": 20.224719101123597,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -1492,7 +1489,7 @@
     }
    ],
    "trailingAnnualDividend": 1.092,
-   "trailingYield": 5.1388235294117655,
+   "trailingYield": 5.1123595505617985,
    "trailing12mSum": 0.728,
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
@@ -1508,8 +1505,8 @@
    "issuer": "野村證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 22.22,
-   "closeDate": "2026-10-02",
+   "price": 22.28,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.109,
     "exDate": "2026-09-16"
@@ -1522,7 +1519,7 @@
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
-   "annualizedYield": 5.886588658865887,
+   "annualizedYield": 5.870736086175943,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -1572,7 +1569,7 @@
     }
    ],
    "trailingAnnualDividend": 0.813,
-   "trailingYield": 3.658865886588659,
+   "trailingYield": 3.6490125673249545,
    "trailing12mSum": 0.542,
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
@@ -1588,8 +1585,8 @@
    "issuer": "群益證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 15.44,
-   "closeDate": "2026-10-02",
+   "price": 15.56,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.058,
     "exDate": "2026-09-02"
@@ -1602,7 +1599,7 @@
    "frequency": "月配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 12,
-   "annualizedYield": 4.507772020725389,
+   "annualizedYield": 4.473007712082262,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -1652,7 +1649,7 @@
     }
    ],
    "trailingAnnualDividend": 0.696,
-   "trailingYield": 4.507772020725389,
+   "trailingYield": 4.4730077120822616,
    "trailing12mSum": 0.522,
    "trailing12mCount": 9,
    "trailingBasis": "配息紀錄不足一年，以近 9 次平均推估",
@@ -1668,8 +1665,8 @@
    "issuer": "中國信託證券投資信託股份有限公司",
    "region": "國外",
    "regionDetail": "日本",
-   "price": 13.29,
-   "closeDate": "2026-10-02",
+   "price": 13.24,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.3,
     "exDate": "2026-07-16"
@@ -1682,7 +1679,7 @@
    "frequency": "季配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 4,
-   "annualizedYield": 300.97817908201654,
+   "annualizedYield": 302.11480362537765,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -1707,7 +1704,7 @@
     }
    ],
    "trailingAnnualDividend": 0.92,
-   "trailingYield": 6.922498118886382,
+   "trailingYield": 6.948640483383686,
    "trailing12mSum": 0.92,
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
@@ -1724,7 +1721,7 @@
    "region": "國內",
    "regionDetail": "國內成分證券",
    "price": 13.14,
-   "closeDate": "2026-10-02",
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.19,
     "exDate": "2026-09-16"
@@ -1800,8 +1797,8 @@
    "issuer": "台新證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 15.15,
-   "closeDate": "2026-10-02",
+   "price": 15.29,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.25,
     "exDate": "2026-09-15"
@@ -1811,7 +1808,7 @@
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
-   "annualizedYield": 19.801980198019802,
+   "annualizedYield": 19.62066710268149,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -1861,7 +1858,7 @@
     }
    ],
    "trailingAnnualDividend": 0.795,
-   "trailingYield": 5.247524752475248,
+   "trailingYield": 5.199476782210596,
    "trailing12mSum": 0.53,
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
@@ -1877,8 +1874,8 @@
    "issuer": "中國信託證券投資信託股份有限公司",
    "region": "國外",
    "regionDetail": "全球",
-   "price": 12.31,
-   "closeDate": "2026-10-02",
+   "price": 12.26,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.1,
     "exDate": "2026-09-16"
@@ -1891,7 +1888,7 @@
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
-   "annualizedYield": 9.74817221770918,
+   "annualizedYield": 9.787928221859708,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -1941,7 +1938,7 @@
     }
    ],
    "trailingAnnualDividend": 0.8265,
-   "trailingYield": 6.714053614947198,
+   "trailingYield": 6.741435562805872,
    "trailing12mSum": 0.551,
    "trailing12mCount": 8,
    "trailingBasis": "配息紀錄不足一年，以近 8 次平均推估",
@@ -1958,7 +1955,7 @@
    "region": "國外",
    "regionDetail": "亞太",
    "price": 14.78,
-   "closeDate": "2026-10-02",
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.2,
     "exDate": "2026-09-16"
@@ -2037,8 +2034,8 @@
    "issuer": "野村證券投資信託股份有限公司",
    "region": "國外",
    "regionDetail": "日本",
-   "price": 21.36,
-   "closeDate": "2026-10-02",
+   "price": 21.23,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.22,
     "exDate": "2026-09-16"
@@ -2048,7 +2045,7 @@
    "frequency": "季配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 4,
-   "annualizedYield": 4.119850187265918,
+   "annualizedYield": 4.145077720207254,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -2073,7 +2070,7 @@
     }
    ],
    "trailingAnnualDividend": 1.0133,
-   "trailingYield": 4.743913857677903,
+   "trailingYield": 4.77296278850683,
    "trailing12mSum": 0.76,
    "trailing12mCount": 3,
    "trailingBasis": "配息紀錄不足一年，以近 3 次平均推估",
@@ -2089,8 +2086,8 @@
    "issuer": "安聯證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 15.79,
-   "closeDate": "2026-10-02",
+   "price": 16.1,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.415,
     "exDate": "2026-07-16"
@@ -2103,7 +2100,7 @@
    "frequency": "季配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 4,
-   "annualizedYield": 11.982267257758075,
+   "annualizedYield": 11.751552795031055,
    "yieldBasis": "下次配息（公告預估）",
    "recentDividends": [
     {
@@ -2128,7 +2125,7 @@
     }
    ],
    "trailingAnnualDividend": 1.061,
-   "trailingYield": 6.719442685243824,
+   "trailingYield": 6.590062111801241,
    "trailing12mSum": 1.061,
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
@@ -2144,8 +2141,8 @@
    "issuer": "野村證券投資信託股份有限公司",
    "region": "國內",
    "regionDetail": "國內成分證券",
-   "price": 11.4,
-   "closeDate": "2026-10-02",
+   "price": 11.76,
+   "closeDate": "2026-10-05",
    "latestDividend": {
     "amount": 0.29,
     "exDate": "2026-09-16"
@@ -2155,7 +2152,7 @@
    "frequency": "季配",
    "frequencyBasis": "官方公開說明書",
    "paymentsPerYear": 4,
-   "annualizedYield": 10.175438596491226,
+   "annualizedYield": 9.863945578231291,
    "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
@@ -2165,7 +2162,7 @@
     }
    ],
    "trailingAnnualDividend": 1.16,
-   "trailingYield": 10.175438596491226,
+   "trailingYield": 9.863945578231291,
    "trailing12mSum": null,
    "trailing12mCount": 0,
    "trailingBasis": "配息紀錄不足一年，以近 1 次平均推估",
