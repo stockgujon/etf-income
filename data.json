@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-12T15:46:48.272Z",
+ "asOf": "2026-10-12T20:21:19.662Z",
  "marketStatus": "收盤",
  "scope": "每次同步依證交所「高股息」與「高息低波動」主題分類重建，收錄該分類下的全部臺灣掛牌 ETF；再與證交所「國內成分證券 ETF」及「國內主動式 ETF」官方清單比對，標示每一檔的投資地區。",
  "etfs": [
@@ -278,10 +278,10 @@
      "paymentDate": "2025-10-15"
     }
    ],
-   "trailingAnnualDividend": 3.34,
-   "trailingYield": 5.251572327044025,
-   "trailing12mSum": 3.34,
-   "trailing12mCount": 4,
+   "trailingAnnualDividend": 4.59,
+   "trailingYield": 7.216981132075471,
+   "trailing12mSum": 4.59,
+   "trailing12mCount": 5,
    "trailingBasis": "近 12 個月實際配息",
    "trailingComplete": true,
    "aumBillionTwd": 1094,
