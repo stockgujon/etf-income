@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-15T05:58:47.323Z",
+ "asOf": "2026-10-15T11:45:29.429Z",
  "marketStatus": "收盤",
  "scope": "每次同步依證交所「高股息」與「高息低波動」主題分類重建，收錄該分類下的全部臺灣掛牌 ETF；再與證交所「國內成分證券 ETF」及「國內主動式 ETF」官方清單比對，標示每一檔的投資地區。",
  "etfs": [
@@ -302,12 +302,12 @@
     "amount": 0.141,
     "exDate": "2026-10-19"
    },
-   "nextDividendSource": "公告預估",
+   "nextDividendSource": "證交所配息清單",
    "frequency": "季配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 4,
    "annualizedYield": 3.905817174515235,
-   "yieldBasis": "下次配息（公告預估）",
+   "yieldBasis": "下次已公告配息",
    "recentDividends": [
     {
      "amount": 0.141,
@@ -357,13 +357,18 @@
     "amount": 0.11,
     "exDate": "2026-10-19"
    },
-   "nextDividendSource": "公告預估",
+   "nextDividendSource": "證交所配息清單",
    "frequency": "月配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 12,
    "annualizedYield": 4.438466711499664,
-   "yieldBasis": "下次配息（公告預估）",
+   "yieldBasis": "下次已公告配息",
    "recentDividends": [
+    {
+     "amount": 0.11,
+     "exDate": null,
+     "paymentDate": "2026-11-12"
+    },
     {
      "amount": 0.11,
      "exDate": "2026-09-16",
@@ -635,13 +640,18 @@
     "amount": 0.075,
     "exDate": "2026-10-19"
    },
-   "nextDividendSource": "公告預估",
+   "nextDividendSource": "證交所配息清單",
    "frequency": "月配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 12,
    "annualizedYield": 4.536290322580645,
-   "yieldBasis": "下次配息（公告預估）",
+   "yieldBasis": "下次已公告配息",
    "recentDividends": [
+    {
+     "amount": 0.075,
+     "exDate": null,
+     "paymentDate": "2026-11-12"
+    },
     {
      "amount": 0.075,
      "exDate": "2026-09-16",
@@ -1120,13 +1130,18 @@
     "amount": 0.5,
     "exDate": "2026-10-19"
    },
-   "nextDividendSource": "公告預估",
+   "nextDividendSource": "證交所配息清單",
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
    "annualizedYield": 19.99333555481506,
-   "yieldBasis": "下次配息（公告預估）",
+   "yieldBasis": "下次已公告配息",
    "recentDividends": [
+    {
+     "amount": 0.5,
+     "exDate": null,
+     "paymentDate": "2026-11-13"
+    },
     {
      "amount": 0.33,
      "exDate": "2026-09-16",
@@ -1529,13 +1544,18 @@
     "amount": 0.109,
     "exDate": "2026-10-19"
    },
-   "nextDividendSource": "公告預估",
+   "nextDividendSource": "證交所配息清單",
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
    "annualizedYield": 5.808170515097691,
-   "yieldBasis": "下次配息（公告預估）",
+   "yieldBasis": "下次已公告配息",
    "recentDividends": [
+    {
+     "amount": 0.109,
+     "exDate": null,
+     "paymentDate": "2026-11-13"
+    },
     {
      "amount": 0.109,
      "exDate": "2026-09-16",
@@ -1688,15 +1708,15 @@
     "exDate": "2026-07-16"
    },
    "nextDividend": {
-    "amount": 10,
+    "amount": 0.3,
     "exDate": "2026-10-19"
    },
-   "nextDividendSource": "公告預估",
+   "nextDividendSource": "證交所配息清單",
    "frequency": "季配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 4,
-   "annualizedYield": 293.68575624082234,
-   "yieldBasis": "下次配息（公告預估）",
+   "annualizedYield": 8.81057268722467,
+   "yieldBasis": "下次已公告配息",
    "recentDividends": [
     {
      "amount": 0.3,
@@ -1742,14 +1762,22 @@
     "amount": 0.19,
     "exDate": "2026-09-16"
    },
-   "nextDividend": null,
-   "nextDividendSource": null,
+   "nextDividend": {
+    "amount": 0.09,
+    "exDate": "2026-10-19"
+   },
+   "nextDividendSource": "證交所配息清單",
    "frequency": "月配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 12,
-   "annualizedYield": 16.92650334075724,
-   "yieldBasis": "最近一次配息",
+   "annualizedYield": 8.017817371937639,
+   "yieldBasis": "下次已公告配息",
    "recentDividends": [
+    {
+     "amount": 0.09,
+     "exDate": null,
+     "paymentDate": "2026-11-12"
+    },
     {
      "amount": 0.19,
      "exDate": "2026-09-16",
@@ -1908,13 +1936,18 @@
     "amount": 0.1,
     "exDate": "2026-10-19"
    },
-   "nextDividendSource": "公告預估",
+   "nextDividendSource": "證交所配息清單",
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
    "annualizedYield": 9.471191791633782,
-   "yieldBasis": "下次配息（公告預估）",
+   "yieldBasis": "下次已公告配息",
    "recentDividends": [
+    {
+     "amount": 0.1,
+     "exDate": null,
+     "paymentDate": "2026-11-13"
+    },
     {
      "amount": 0.1,
      "exDate": "2026-09-16",
@@ -1988,13 +2021,18 @@
     "amount": 0.2,
     "exDate": "2026-10-19"
    },
-   "nextDividendSource": "公告預估",
+   "nextDividendSource": "證交所配息清單",
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
    "annualizedYield": 16.064257028112454,
-   "yieldBasis": "下次配息（公告預估）",
+   "yieldBasis": "下次已公告配息",
    "recentDividends": [
+    {
+     "amount": 0.2,
+     "exDate": null,
+     "paymentDate": "2026-11-13"
+    },
     {
      "amount": 0.2,
      "exDate": "2026-09-16",
@@ -2120,12 +2158,12 @@
     "amount": 0.473,
     "exDate": "2026-10-19"
    },
-   "nextDividendSource": "公告預估",
+   "nextDividendSource": "證交所配息清單",
    "frequency": "季配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 4,
    "annualizedYield": 11.936908517350158,
-   "yieldBasis": "下次配息（公告預估）",
+   "yieldBasis": "下次已公告配息",
    "recentDividends": [
     {
      "amount": 0.415,
