@@ -1,5 +1,5 @@
 {
- "asOf": "2026-11-12T15:28:11.169Z",
+ "asOf": "2026-11-12T19:00:32.213Z",
  "marketStatus": "收盤",
  "scope": "每次同步依證交所「高股息」與「高息低波動」主題分類重建，收錄該分類下的全部臺灣掛牌 ETF；再與證交所「國內成分證券 ETF」及「國內主動式 ETF」官方清單比對，標示每一檔的投資地區。",
  "etfs": [
@@ -342,10 +342,10 @@
      "paymentDate": "2025-11-13"
     }
    ],
-   "trailingAnnualDividend": 0.705,
-   "trailingYield": 5.017793594306049,
-   "trailing12mSum": 0.705,
-   "trailing12mCount": 5,
+   "trailingAnnualDividend": 0.564,
+   "trailingYield": 4.014234875444839,
+   "trailing12mSum": 0.564,
+   "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
    "trailingComplete": true,
    "aumBillionTwd": 16,
@@ -1219,11 +1219,11 @@
      "paymentDate": "2026-02-23"
     }
    ],
-   "trailingAnnualDividend": 2.6467,
-   "trailingYield": 9.770025839793282,
-   "trailing12mSum": 1.985,
-   "trailing12mCount": 9,
-   "trailingBasis": "配息紀錄不足一年，以近 9 次平均推估",
+   "trailingAnnualDividend": 2.982,
+   "trailingYield": 11.007751937984498,
+   "trailing12mSum": 2.485,
+   "trailing12mCount": 10,
+   "trailingBasis": "配息紀錄不足一年，以近 10 次平均推估",
    "trailingComplete": false,
    "aumBillionTwd": 144,
    "hasIncomeEqualization": true,
@@ -1653,11 +1653,11 @@
      "paymentDate": "2026-02-12"
     }
    ],
-   "trailingAnnualDividend": 0.868,
-   "trailingYield": 4.2674532940019665,
-   "trailing12mSum": 0.651,
-   "trailing12mCount": 9,
-   "trailingBasis": "配息紀錄不足一年，以近 9 次平均推估",
+   "trailingAnnualDividend": 0.912,
+   "trailingYield": 4.48377581120944,
+   "trailing12mSum": 0.76,
+   "trailing12mCount": 10,
+   "trailingBasis": "配息紀錄不足一年，以近 10 次平均推估",
    "trailingComplete": false,
    "aumBillionTwd": 11,
    "hasIncomeEqualization": true,
@@ -1797,10 +1797,10 @@
      "paymentDate": "2025-11-14"
     }
    ],
-   "trailingAnnualDividend": 0.92,
-   "trailingYield": 6.809770540340489,
-   "trailing12mSum": 0.92,
-   "trailing12mCount": 4,
+   "trailingAnnualDividend": 1.22,
+   "trailingYield": 9.030347890451518,
+   "trailing12mSum": 1.22,
+   "trailing12mCount": 5,
    "trailingBasis": "近 12 個月實際配息",
    "trailingComplete": true,
    "aumBillionTwd": 4,
@@ -2054,11 +2054,11 @@
      "paymentDate": "2026-02-23"
     }
    ],
-   "trailingAnnualDividend": 0.868,
-   "trailingYield": 6.807843137254902,
-   "trailing12mSum": 0.651,
-   "trailing12mCount": 9,
-   "trailingBasis": "配息紀錄不足一年，以近 9 次平均推估",
+   "trailingAnnualDividend": 0.9012,
+   "trailingYield": 7.068235294117647,
+   "trailing12mSum": 0.751,
+   "trailing12mCount": 10,
+   "trailingBasis": "配息紀錄不足一年，以近 10 次平均推估",
    "trailingComplete": false,
    "aumBillionTwd": 17,
    "hasIncomeEqualization": true,
@@ -2139,11 +2139,11 @@
      "paymentDate": "2026-02-23"
     }
    ],
-   "trailingAnnualDividend": 1.3547,
-   "trailingYield": 9.788294797687861,
-   "trailing12mSum": 1.016,
-   "trailing12mCount": 9,
-   "trailingBasis": "配息紀錄不足一年，以近 9 次平均推估",
+   "trailingAnnualDividend": 1.4592,
+   "trailingYield": 10.54335260115607,
+   "trailing12mSum": 1.216,
+   "trailing12mCount": 10,
+   "trailingBasis": "配息紀錄不足一年，以近 10 次平均推估",
    "trailingComplete": false,
    "aumBillionTwd": 13,
    "hasIncomeEqualization": true,
@@ -2248,9 +2248,9 @@
      "paymentDate": "2025-11-13"
     }
    ],
-   "trailingAnnualDividend": 1.061,
-   "trailingYield": 7.836041358936486,
-   "trailing12mSum": 1.061,
+   "trailingAnnualDividend": 1.324,
+   "trailingYield": 9.778434268833088,
+   "trailing12mSum": 1.324,
    "trailing12mCount": 4,
    "trailingBasis": "近 12 個月實際配息",
    "trailingComplete": true,
