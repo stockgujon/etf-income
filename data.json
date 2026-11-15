@@ -1,5 +1,5 @@
 {
- "asOf": "2026-11-15T14:08:45.680Z",
+ "asOf": "2026-11-15T17:51:56.548Z",
  "marketStatus": "收盤",
  "scope": "每次同步依證交所「高股息」與「高息低波動」主題分類重建，收錄該分類下的全部臺灣掛牌 ETF；再與證交所「國內成分證券 ETF」及「國內主動式 ETF」官方清單比對，標示每一檔的投資地區。",
  "etfs": [
@@ -1029,11 +1029,11 @@
      "paymentDate": "2026-02-13"
     }
    ],
-   "trailingAnnualDividend": 2.6267,
-   "trailingYield": 10.288679984332157,
-   "trailing12mSum": 1.97,
-   "trailing12mCount": 9,
-   "trailingBasis": "配息紀錄不足一年，以近 9 次平均推估",
+   "trailingAnnualDividend": 2.82,
+   "trailingYield": 11.045828437132784,
+   "trailing12mSum": 2.35,
+   "trailing12mCount": 10,
+   "trailingBasis": "配息紀錄不足一年，以近 10 次平均推估",
    "trailingComplete": false,
    "aumBillionTwd": 1547,
    "hasIncomeEqualization": true,
@@ -1255,22 +1255,19 @@
    "closeDate": "2026-11-13",
    "latestDividend": {
     "amount": 0.16,
-    "exDate": "2026-10-16"
-   },
-   "nextDividend": {
-    "amount": 0.16,
     "exDate": "2026-11-16"
    },
-   "nextDividendSource": "證交所配息清單",
+   "nextDividend": null,
+   "nextDividendSource": null,
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
    "annualizedYield": 9.790922998470169,
-   "yieldBasis": "下次已公告配息",
+   "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
      "amount": 0.16,
-     "exDate": null,
+     "exDate": "2026-11-16",
      "paymentDate": "2026-12-04"
     },
     {
@@ -1927,23 +1924,20 @@
    "price": 12.73,
    "closeDate": "2026-11-13",
    "latestDividend": {
-    "amount": 0.25,
-    "exDate": "2026-10-16"
-   },
-   "nextDividend": {
     "amount": 0.08,
     "exDate": "2026-11-16"
    },
-   "nextDividendSource": "證交所配息清單",
+   "nextDividend": null,
+   "nextDividendSource": null,
    "frequency": "月配",
    "frequencyBasis": "官方收益分配條款",
    "paymentsPerYear": 12,
    "annualizedYield": 7.541241162608012,
-   "yieldBasis": "下次已公告配息",
+   "yieldBasis": "最近一次配息",
    "recentDividends": [
     {
      "amount": 0.08,
-     "exDate": null,
+     "exDate": "2026-11-16",
      "paymentDate": "2026-12-04"
     },
     {
