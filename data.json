@@ -1,5 +1,5 @@
 {
- "asOf": "2026-11-19T15:55:26.840Z",
+ "asOf": "2026-11-19T19:32:00.199Z",
  "marketStatus": "收盤",
  "scope": "每次同步依證交所「高股息」與「高息低波動」主題分類重建，收錄該分類下的全部臺灣掛牌 ETF；再與證交所「國內成分證券 ETF」及「國內主動式 ETF」官方清單比對，標示每一檔的投資地區。",
  "etfs": [
@@ -507,19 +507,21 @@
    "closeDate": "2026-11-19",
    "latestDividend": {
     "amount": 0.21,
-    "exDate": "2026-08-21"
-   },
-   "nextDividend": {
-    "amount": 0.21,
     "exDate": "2026-11-20"
    },
-   "nextDividendSource": "證交所配息清單",
+   "nextDividend": null,
+   "nextDividendSource": null,
    "frequency": "季配",
    "frequencyBasis": "近次實際配息間隔",
    "paymentsPerYear": 4,
    "annualizedYield": 5.660377358490567,
-   "yieldBasis": "下次已公告配息",
+   "yieldBasis": "最近一次配息",
    "recentDividends": [
+    {
+     "amount": 0.21,
+     "exDate": "2026-11-20",
+     "paymentDate": "2026-12-11"
+    },
     {
      "amount": 0.21,
      "exDate": "2026-08-21",
@@ -784,11 +786,11 @@
      "paymentDate": "2026-03-20"
     }
    ],
-   "trailingAnnualDividend": 1.2075,
-   "trailingYield": 7.090428655314152,
-   "trailing12mSum": 0.805,
-   "trailing12mCount": 4,
-   "trailingBasis": "配息紀錄不足一年，以近 4 次平均推估",
+   "trailingAnnualDividend": 1.2876,
+   "trailingYield": 7.560775102759836,
+   "trailing12mSum": 1.073,
+   "trailing12mCount": 5,
+   "trailingBasis": "配息紀錄不足一年，以近 5 次平均推估",
    "trailingComplete": false,
    "aumBillionTwd": 25,
    "hasIncomeEqualization": true,
